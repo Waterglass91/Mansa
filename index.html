@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta property="og:title" content="Mansa Enterprise">
+<meta property="og:title" content="Mansa Security">
 <meta property="og:description" content="Close protection for high-profile clients. Manchester, UK and abroad.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
-<title>Mansa Enterprise</title>
+<title>Mansa Security</title>
 <meta name="description" content="Protection rapprochée pour personnalités exposées : sportifs de haut niveau, artistes, dirigeants. Manchester, Royaume-Uni et international. Close protection for high-profile clients.">
 <meta name="theme-color" content="#0a0a09">
 <script>
@@ -362,15 +362,15 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 <div class="loader" aria-hidden="true">
   <div class="loader-inner">
     <img class="emb loader-emblem" data-img="emblem" alt="">
-    <span class="wordmark">Mansa Enterprise</span>
-    <span class="tag"><span data-l="fr">Sécurité privée</span><span data-l="en">Private security</span></span>
+    <span class="wordmark">Mansa Security</span>
+    <span class="tag">Executive Protection</span>
   </div>
 </div>
 
 <header class="header" id="header">
-  <button class="brand" type="button" data-home aria-label="Mansa Enterprise">
+  <button class="brand" type="button" data-home aria-label="Mansa Security">
     <img class="emb brand-emblem" data-img="emblemSm" alt="">
-    <span class="brand-txt"><span class="wordmark">Mansa Enterprise</span><span class="brand-sub"><span data-l="fr">Sécurité privée</span><span data-l="en">Private security</span></span></span>
+    <span class="brand-txt"><span class="wordmark">Mansa Security</span><span class="brand-sub">Executive Protection</span></span>
   </button>
   <div class="header-right">
     <button class="back" type="button" data-home>
@@ -437,7 +437,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
   </div>
   <div class="home-foot">
     <span>Jactin House · Manchester M4 6WX · +44 (0) 7544 548227</span>
-    <span>© 2026 Mansa Enterprise · <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener"><span data-l="fr">Conditions d’utilisation</span><span data-l="en">Terms of service</span></a></span>
+    <span>© 2026 Mansa Security · <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener"><span data-l="fr">Conditions d’utilisation</span><span data-l="en">Terms of service</span></a></span>
   </div>
 </section>
 <div id="domains"></div>
@@ -546,12 +546,12 @@ var ROMAN=['I','II','III','IV'];
 $$('img[data-img]').forEach(function(im){im.src=IMG[im.getAttribute('data-img')]});
 
 /* ---------- Construction des domaines ---------- */
-var foot='<footer class="dm-foot"><span>Mansa Enterprise · Jactin House · Manchester M4 6WX · +44 (0) 7544 548227 · info@mansasecurity.co.uk</span><span>© 2026 · <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener">'+L('Conditions d’utilisation','Terms of service')+'</a></span></footer>';
+var foot='<footer class="dm-foot"><span>Mansa Security · Jactin House · Manchester M4 6WX · +44 (0) 7544 548227 · info@mansasecurity.co.uk</span><span>© 2026 · <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener">'+L('Conditions d’utilisation','Terms of service')+'</a></span></footer>';
 function nextOf(d){return D[(d.k+1)%D.length]}
 function heroBlock(d,ctas,short){
   var ring=ringOf(d.r);
   return '<header class="dm-hero'+(short?' dm-hero--short':'')+'"><img class="dm-img ph" src="'+IMG[d.img]+'" alt=""><div class="dm-veil"></div>'+
-   '<div class="dm-hero-in"><span class="kicker">'+(d.type==='svc'?L('Nos services','Our services'):'Mansa Enterprise')+'</span>'+
+   '<div class="dm-hero-in"><span class="kicker">'+(d.type==='svc'?L('Nos services','Our services'):'Mansa Security')+'</span>'+
    '<h1 class="dm-title"><span class="line"><span>'+L(d.fr.t1,d.en.t1)+'</span></span><span class="line"><span>'+L(d.fr.t2,d.en.t2)+'</span></span></h1>'+
    '<p class="dm-intro">'+L(d.fr.i,d.en.i)+'</p><div class="dm-ctas">'+ctas+'</div></div></header>';
 }
@@ -598,7 +598,7 @@ function contactHTML(d){
   '<aside class="coords rv">'+
    '<div class="coord"><small>'+L('Téléphone','Telephone')+'</small><div class="coord-row"><span class="coord-v" id="c-tel">+44 (0) 7544 548227</span><button class="copy" type="button" data-copy="c-tel"></button></div></div>'+
    '<div class="coord"><small>Email</small><div class="coord-row"><span class="coord-v" id="c-mail">info@mansasecurity.co.uk</span><button class="copy" type="button" data-copy="c-mail"></button></div></div>'+
-   '<div class="coord"><small>'+L('Adresse','Address')+'</small><address>Mansa Enterprise<br>Jactin House<br>Manchester M4 6WX<br>'+L('Royaume-Uni','United Kingdom')+'</address></div>'+
+   '<div class="coord"><small>'+L('Adresse','Address')+'</small><address>Mansa Security<br>Jactin House<br>Manchester M4 6WX<br>'+L('Royaume-Uni','United Kingdom')+'</address></div>'+
    '<div class="coord"><small>Instagram</small><a class="ig" href="https://www.instagram.com/mansasecurity/" target="_blank" rel="noopener">@mansasecurity</a></div>'+
   '</aside></div></section>'+nextBlock(d)+foot;
 }
@@ -655,7 +655,7 @@ function renderDossier(){
   }else{
     var d=locked, x=d[lang];
     dossier.classList.add('locked');
-    $('#dosK').textContent=d.type==='svc'?t.idleK:'Mansa Enterprise';
+    $('#dosK').textContent=d.type==='svc'?t.idleK:'Mansa Security';
     $('#dosT').textContent=x.lab; $('#dosP').textContent=x.p; $('#dosGo').textContent=t.enter+' →';
     if(dosImg.getAttribute('data-k')!==d.img){dosImg.classList.add('swap');setTimeout(function(){dosImg.src=IMG[d.img];dosImg.setAttribute('data-k',d.img);dosImg.classList.remove('swap')},180)}
     dossier.classList.remove('flash'); void dossier.offsetWidth; dossier.classList.add('flash');
