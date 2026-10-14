@@ -1,6 +1,8 @@
 # Mansa Security
 
-Site vitrine bilingue (FR/EN) de Mansa Security, protection rapprochée et sécurité privée à Manchester.
+Site vitrine de Mansa Security, protection rapprochée et sécurité privée à Manchester, en quatre langues : français, anglais, espagnol et arabe (mise en page de droite à gauche).
+
+Lien direct vers une langue : `#fr`, `#en`, `#es`, `#ar` (le choix du visiteur est ensuite mémorisé).
 
 Page unique autonome : `index.html` (photos intégrées). Publié avec GitHub Pages.
 

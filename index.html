@@ -11,17 +11,17 @@
 <meta name="description" content="Protection rapprochée pour personnalités exposées : sportifs de haut niveau, artistes, dirigeants. Manchester, Royaume-Uni et international. Close protection for high-profile clients.">
 <meta name="theme-color" content="#0a0a09">
 <script>
-(function(){var h=document.documentElement,L=['fr','en'],tok=(location.hash||'').slice(1).toLowerCase(),l=L.indexOf(tok)>=0?tok:'';
+(function(){var h=document.documentElement,L=['fr','en','es','ar'],tok=(location.hash||'').slice(1).toLowerCase(),l=L.indexOf(tok)>=0?tok:'';
 if(!l){try{l=localStorage.getItem('mansa-lang')||''}catch(e){}}
 if(L.indexOf(l)<0)l='fr';
-h.lang=l;h.classList.add('js','l-'+l);
+h.lang=l;h.dir=l==='ar'?'rtl':'ltr';h.classList.add('js','l-'+l);
 try{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('no-anim')}catch(e){}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* Layout: console radar en page d'accueil (aucun défilement) ; chaque cible ouvre un « domaine » plein écran par une ouverture circulaire. DA ABS VIP : noir velours, or, serif. Bilingue FR/EN (data-l). */
+/* Layout: console radar en page d'accueil (aucun défilement) ; chaque cible ouvre un « domaine » plein écran par une ouverture circulaire. DA ABS VIP : noir velours, or, serif. Quadrilingue FR/EN/ES/AR (data-l), arabe en RTL. */
 :root{
   color-scheme:dark;
   --noir:#0a0a09; --noir-2:#0f0e0c; --noir-3:#17150f;
@@ -29,13 +29,13 @@ try{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList
   --creme:#f0e9da; --gris:rgba(240,233,218,.62); --gris-2:rgba(240,233,218,.4);
   --ligne:rgba(185,167,124,.3); --ligne-n:rgba(240,233,218,.1);
   --erreur:#e0a084;
-  --display:'Cormorant Garamond','Cormorant',Garamond,'Times New Roman',serif;
-  --body:'Jost','Futura','Century Gothic',system-ui,sans-serif;
+  --display:'Cormorant Garamond','Cormorant','Amiri',Garamond,'Times New Roman',serif;
+  --body:'Jost','IBM Plex Sans Arabic','Futura','Century Gothic',system-ui,sans-serif;
   --logo:'Bebas Neue','Oswald','Arial Narrow',Impact,sans-serif;
   --ease:cubic-bezier(.77,0,.18,1); --out:cubic-bezier(.16,1,.3,1);
   --gutter:clamp(18px,4.4vw,80px);
 }
-html.l-fr [data-l="en"],html.l-en [data-l="fr"]{display:none!important}
+html.l-fr [data-l]:not([data-l="fr"]),html.l-en [data-l]:not([data-l="en"]),html.l-es [data-l]:not([data-l="es"]),html.l-ar [data-l]:not([data-l="ar"]){display:none!important}
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--noir);color:var(--creme);-webkit-text-size-adjust:100%}
 body{font-family:var(--body);font-weight:300;font-size:17px;line-height:1.7;background:var(--noir);color:var(--creme);overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
@@ -85,7 +85,7 @@ main{overflow-x:clip}
 body.menu-open .header{background:transparent}
 .brand{display:flex;align-items:center;gap:14px;min-width:0}
 .brand-emblem{width:52px;flex:0 0 auto}
-.brand-txt{display:flex;flex-direction:column;gap:5px;text-align:left}
+.brand-txt{display:flex;flex-direction:column;gap:5px;text-align:start}
 .brand .wordmark{font-size:21px;letter-spacing:.07em;white-space:nowrap}
 .brand-sub{display:block;font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:var(--gris)}
 .header-right{display:flex;align-items:center;gap:24px}
@@ -95,9 +95,25 @@ body.menu-open .header{background:transparent}
 body.in-domain .back{display:inline-flex}
 .lang{display:flex;align-items:center}
 .lang button{min-height:44px;padding:0 7px;font-size:11px;letter-spacing:.24em;color:var(--gris-2);transition:color .3s}
-.lang button+button{border-left:1px solid var(--ligne-n)}
+.lang button+button{border-inline-start:1px solid var(--ligne-n)}
 .lang button:hover{color:var(--creme)}
 .lang button[aria-pressed="true"]{color:var(--or-clair)}
+.lang-wrap{position:relative}
+.lang-cur{display:none}
+@media (max-width:640px){
+  .lang-cur{display:flex;align-items:center;gap:7px;min-height:44px;padding:0 6px;font-size:10.5px;letter-spacing:.24em;color:var(--or-clair)}
+  .lang-cur svg{width:9px;height:6px;transition:transform .3s}
+  .lang-wrap.open .lang-cur svg{transform:rotate(180deg)}
+  .header .lang{position:absolute;top:calc(100% + 4px);inset-inline-end:-6px;flex-direction:column;align-items:stretch;min-width:68px;background:var(--noir);border:1px solid var(--ligne);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s,transform .3s var(--out),visibility 0s .3s}
+  .lang-wrap.open .lang{opacity:1;visibility:visible;transform:none;transition:opacity .25s,transform .3s var(--out)}
+  .header .lang button{padding:0 16px;font-size:11px;text-align:center}
+  .header .lang button+button{border-inline-start:0;border-top:1px solid var(--ligne-n)}
+}
+@media (max-width:374px){
+  body.in-domain .back{display:none}
+  .brand-sub{font-size:8px;letter-spacing:.16em}
+}
+.header-right>*,.lang-cur svg,.back svg{flex:0 0 auto}
 .menu-toggle{display:flex;align-items:center;gap:16px;min-height:44px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--creme)}
 .burger{width:30px;height:12px;position:relative}
 .burger i{position:absolute;left:0;right:0;height:1px;background:var(--creme);transition:transform .6s var(--ease),width .6s var(--ease)}
@@ -129,7 +145,7 @@ body.menu-open .menu-side{clip-path:inset(0 0 0 0);transition-delay:.15s}
 .menu-side img.on{opacity:.75;transform:none}
 .menu-side::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--noir),transparent 40%)}
 .menu-inner{position:relative;height:100%;width:62%;display:flex;flex-direction:column;justify-content:center;padding:110px var(--gutter) 48px;overflow-y:auto}
-.menu-nav button{display:flex;align-items:baseline;gap:22px;overflow:hidden;font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,74px);line-height:1.16;text-align:left}
+.menu-nav button{display:flex;align-items:baseline;gap:22px;overflow:hidden;font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,74px);line-height:1.16;text-align:start}
 .menu-nav small{font-family:var(--body);font-size:10.5px;letter-spacing:.3em;color:var(--or);min-width:2.6em;transform:translateY(110%);transition:transform .9s var(--ease)}
 .menu-nav .t{display:inline-block;transform:translateY(110%);transition:transform .9s var(--ease),color .4s}
 body.menu-open .menu-nav .t,body.menu-open .menu-nav small{transform:none;transition-delay:calc(var(--i) * 60ms + 280ms),0s}
@@ -232,11 +248,11 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
   .dossier.locked{transform:none}
   .dos-media{aspect-ratio:auto;height:100%}
   .dos-k{display:none}
-  .dos-body{padding:14px 44px 14px 14px;gap:4px}
+  .dos-body{padding-block:14px;padding-inline:14px 44px;gap:4px}
   .dos-t{font-size:22px}
   .dos-p{display:none}
   .dossier .btn{width:100%}
-  .dos-close{display:grid;place-items:center;position:absolute;top:6px;right:6px;width:36px;height:36px;font-size:20px;color:var(--gris);z-index:3}
+  .dos-close{display:grid;place-items:center;position:absolute;top:6px;inset-inline-end:6px;width:36px;height:36px;font-size:20px;color:var(--gris);z-index:3}
   .home-foot{display:none}
 }
 
@@ -285,7 +301,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .msteps strong{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.2}
 .msteps li>span{color:var(--gris);font-size:15.5px}
 @media (max-width:900px){.dm-split{grid-template-columns:minmax(0,1fr)}}
-.dm-next{position:relative;display:block;width:100%;text-align:left;min-height:clamp(260px,46vh,440px);overflow:hidden;border-top:1px solid var(--ligne);cursor:pointer}
+.dm-next{position:relative;display:block;width:100%;text-align:start;min-height:clamp(260px,46vh,440px);overflow:hidden;border-top:1px solid var(--ligne);cursor:pointer}
 .dm-next img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;transform:scale(1.06);transition:transform 1.6s var(--out),opacity .8s}
 .dm-next::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--noir) 10%,rgba(10,10,9,.3))}
 .dm-next-in{position:relative;z-index:2;padding:clamp(60px,10vh,110px) var(--gutter);display:grid;gap:10px}
@@ -314,19 +330,19 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 /* ===== Conseil & évaluation ===== */
 .cv-facts{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);margin-top:clamp(34px,5vh,56px)}
 .cv-facts li{padding:18px 20px;display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:clamp(20px,1.7vw,26px);line-height:1.2;min-width:0}
-.cv-facts li+li{border-left:1px solid var(--ligne-n)}
+.cv-facts li+li{border-inline-start:1px solid var(--ligne-n)}
 .cv-facts li::before{content:"";flex:0 0 auto;width:7px;height:7px;transform:rotate(45deg);background:var(--or)}
 .cv-scene{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,90px);margin-top:clamp(40px,7vh,80px)}
 .cv-stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);align-self:start;height:min(72vh,640px);border:1px solid var(--ligne);background:radial-gradient(ellipse at 50% 42%,#18150f 0%,var(--noir-2) 72%);overflow:hidden;min-width:0}
 .cv-stage canvas{position:absolute;inset:0;width:100%;height:100%}
 .cv-dots{position:absolute;top:16px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;z-index:2}
-.cv-dots button{position:relative;min-height:36px;padding-top:12px;text-align:left;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris-2);font-variant-numeric:tabular-nums;transition:color .4s;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.cv-dots button::before,.cv-dots button::after{content:"";position:absolute;left:0;top:0;height:2px}
-.cv-dots button::before{right:0;background:var(--ligne-n)}
+.cv-dots button{position:relative;min-height:36px;padding-top:12px;text-align:start;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris-2);font-variant-numeric:tabular-nums;transition:color .4s;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cv-dots button::before,.cv-dots button::after{content:"";position:absolute;inset-inline-start:0;top:0;height:2px}
+.cv-dots button::before{inset-inline-end:0;background:var(--ligne-n)}
 .cv-dots button::after{width:0;background:var(--or-clair);transition:width .9s var(--ease)}
 .cv-dots button.on{color:var(--or-clair)}
 .cv-dots button.on::after,.cv-dots button.past::after{width:100%}
-.cv-dots b{font-weight:500;color:inherit;margin-right:6px}
+.cv-dots b{font-weight:500;color:inherit;margin-inline-end:6px}
 .cv-cap{position:absolute;left:20px;right:20px;bottom:16px;z-index:2;display:flex;align-items:baseline;gap:14px;pointer-events:none}
 .cv-cap b{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(34px,3vw,46px);line-height:1;color:var(--or-clair)}
 .cv-cap span{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris)}
@@ -341,7 +357,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .cv-step h3{font-family:var(--display);font-weight:300;font-size:clamp(32px,3.2vw,52px);line-height:1.05;margin:14px 0}
 .cv-step p{color:var(--gris);max-width:44ch}
 .cv-svcs{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:clamp(36px,6vh,64px)}
-.cv-card{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;text-align:left;border:1px solid var(--ligne-n);background:var(--noir-3)}
+.cv-card{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;text-align:start;border:1px solid var(--ligne-n);background:var(--noir-3)}
 .cv-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s var(--out),opacity .6s;opacity:.7}
 .cv-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,9,.92),rgba(10,10,9,.1) 60%)}
 .cv-card .t{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;display:flex;flex-direction:column;gap:6px}
@@ -357,7 +373,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .cv-lines a:hover{color:var(--or-clair)}
 @media (max-width:900px){
   .cv-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cv-facts li:nth-child(3){border-left:0}
+  .cv-facts li:nth-child(3){border-inline-start:0}
   .cv-facts li:nth-child(n+3){border-top:1px solid var(--ligne-n)}
   .cv-facts li{padding:14px 12px;font-size:19px}
   .cv-scene{grid-template-columns:minmax(0,1fr);gap:0}
@@ -409,6 +425,34 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .copy.ok{color:var(--noir);background:var(--or);border-color:var(--or)}
 @media (max-width:900px){.contact-grid{grid-template-columns:minmax(0,1fr)}.form{grid-template-columns:minmax(0,1fr)}}
 
+
+/* ===== Espagnol / Arabe (RTL) ===== */
+.radar{direction:ltr}
+.radar .tgt-lab{unicode-bidi:plaintext}
+.arr{display:inline-block}
+html[dir="rtl"] .arr,html[dir="rtl"] .dm-next-t i{transform:scaleX(-1)}
+@media (hover:hover){html[dir="rtl"] .dm-next:hover .dm-next-t i{transform:translateX(-18px) scaleX(-1)}}
+html[dir="rtl"] .menu-side{right:auto;left:0}
+html[dir="rtl"] .menu-side::after{background:linear-gradient(270deg,var(--noir),transparent 40%)}
+html[dir="rtl"] .dm-veil{background:linear-gradient(180deg,rgba(10,10,9,.55) 0%,rgba(10,10,9,.05) 34%,rgba(10,10,9,.35) 62%,var(--noir) 100%),linear-gradient(270deg,rgba(10,10,9,.6),transparent 60%)}
+html[dir="rtl"] .dm-next::after{background:linear-gradient(270deg,var(--noir) 10%,rgba(10,10,9,.3))}
+html[dir="rtl"] .home-bg::after{background:radial-gradient(ellipse at 34% 50%,rgba(10,10,9,.35) 0%,rgba(10,10,9,.82) 55%,var(--noir) 100%),linear-gradient(180deg,rgba(10,10,9,.6),transparent 25%,transparent 70%,var(--noir))}
+html[dir="rtl"] .coord-v,html[dir="rtl"] .cv-lines a,html[dir="rtl"] .menu-foot a,html[dir="rtl"] .coord a.ig,html[dir="rtl"] .home-foot>span:first-child,html[dir="rtl"] .dm-foot>span:first-child{direction:ltr;unicode-bidi:isolate}
+html[dir="rtl"] .menu-foot a,html[dir="rtl"] .coord a.ig{display:inline-block}
+html[dir="rtl"] input[type=email],html[dir="rtl"] input[type=tel]{direction:ltr;text-align:right}
+html[lang="ar"] body *:not(.wordmark):not(.brand-sub):not(.tag){letter-spacing:0!important}
+html[lang="ar"] body *{font-style:normal!important}
+html[lang="ar"] body{font-size:17.5px;line-height:1.85}
+html[lang="ar"] .home-title{line-height:1.3}
+html[lang="ar"] .dm-title{line-height:1.25}
+html[lang="ar"] .home-title .line,html[lang="ar"] .dm-title .line{padding-top:.04em;padding-bottom:.18em}
+html[lang="ar"] .dm-h2,html[lang="ar"] .why p,html[lang="ar"] .cv-step h3,html[lang="ar"] .dos-t,html[lang="ar"] .dm-next-t,html[lang="ar"] .incl strong,html[lang="ar"] .msteps strong,html[lang="ar"] .cv-card strong,html[lang="ar"] .done h3{line-height:1.4}
+html[lang="ar"] .home-title .line:nth-child(2)>span,html[lang="ar"] .dm-title .line:nth-child(2)>span{font-weight:400}
+html[lang="ar"] :is(.kicker,.dos-k,.dos-hint,.dm-next-k,.field label,.field .lbl,.coord small,.chip,.cv-badge,.cv-dots button,.cv-card small,.btn,.menu-foot strong,.hud,.radar-hint,.cv-cap span,.copy,.back,.menu-toggle,.tgt-lab){font-size:13px}
+html[lang="ar"] .home-foot,html[lang="ar"] .dm-foot{font-size:12.5px}
+html[lang="ar"] .tgt-lab{font-size:13.5px;padding:3px 10px}
+@media (max-width:900px){html[lang="ar"] .tgt-lab{font-size:12.5px;padding:2px 7px}}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -435,12 +479,17 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
   <div class="header-right">
     <button class="back" type="button" data-home>
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="currentColor"/><path d="M12 12 L19 5" stroke="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
-      <span class="back-label"><span data-l="fr">Radar</span><span data-l="en">Radar</span></span>
+      <span class="back-label"><span data-l="fr">Radar</span><span data-l="en">Radar</span><span data-l="es">Radar</span><span data-l="ar">الرادار</span></span>
     </button>
-    <nav class="lang" aria-label="Langue / Language">
+    <div class="lang-wrap" id="langWrap">
+    <button class="lang-cur" id="langCur" type="button" aria-expanded="false" aria-controls="langNav" aria-label="Langue / Language / Idioma / اللغة"><span id="langCurT">FR</span><svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor"/></svg></button>
+    <nav class="lang" id="langNav" aria-label="Langue / Language">
       <button type="button" data-set="fr" aria-pressed="false" lang="fr">FR</button>
       <button type="button" data-set="en" aria-pressed="false" lang="en">EN</button>
+      <button type="button" data-set="es" aria-pressed="false" lang="es">ES</button>
+      <button type="button" data-set="ar" aria-pressed="false" lang="ar" title="العربية">AR</button>
     </nav>
+    </div>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu">
       <span class="menu-label" id="menuLabel">Menu</span><span class="burger" aria-hidden="true"><i></i><i></i></span>
     </button>
@@ -452,8 +501,8 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
   <div class="menu-inner">
     <nav class="menu-nav" id="menuNav" aria-label="Menu"></nav>
     <div class="menu-foot">
-      <div><strong><span data-l="fr">Téléphone</span><span data-l="en">Telephone</span></strong><a href="tel:+447544548227">+44 (0) 7544 548227</a></div>
-      <div><strong>Email</strong><a href="mailto:info@mansasecurity.co.uk">info@mansasecurity.co.uk</a></div>
+      <div><strong><span data-l="fr">Téléphone</span><span data-l="en">Telephone</span><span data-l="es">Teléfono</span><span data-l="ar">الهاتف</span></strong><a href="tel:+447544548227">+44 (0) 7544 548227</a></div>
+      <div><strong><span data-l="fr">Email</span><span data-l="en">Email</span><span data-l="es">Correo</span><span data-l="ar">البريد الإلكتروني</span></strong><a href="mailto:info@mansasecurity.co.uk">info@mansasecurity.co.uk</a></div>
       <div><strong>Instagram</strong><a href="https://www.instagram.com/mansasecurity/" target="_blank" rel="noopener">@mansasecurity</a></div>
     </div>
   </div>
@@ -465,12 +514,12 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
   <div class="home-bg"><img class="ph" data-img="home" alt=""></div>
   <div class="home-in">
     <div class="intro">
-      <span class="kicker fadein" style="margin-bottom:0"><span data-l="fr">Sécurité privée · Manchester · International</span><span data-l="en">Private security · Manchester · Worldwide</span></span>
+      <span class="kicker fadein" style="margin-bottom:0"><span data-l="fr">Sécurité privée · Manchester · International</span><span data-l="en">Private security · Manchester · Worldwide</span><span data-l="es">Seguridad privada · Manchester · Internacional</span><span data-l="ar">أمن خاص · مانشستر · دولي</span></span>
       <h1 class="home-title">
-        <span class="line"><span><span data-l="fr">Protection rapprochée</span><span data-l="en">Close protection</span></span></span>
-        <span class="line"><span><span data-l="fr">pour personnalités exposées.</span><span data-l="en">for high-profile clients.</span></span></span>
+        <span class="line"><span><span data-l="fr">Protection rapprochée</span><span data-l="en">Close protection</span><span data-l="es">Protección personal</span><span data-l="ar">الحماية الشخصية</span></span></span>
+        <span class="line"><span><span data-l="fr">pour personnalités exposées.</span><span data-l="en">for high-profile clients.</span><span data-l="es">para personas de alto perfil.</span><span data-l="ar">للشخصيات البارزة.</span></span></span>
       </h1>
-      <p class="home-sub fadein"><span data-l="fr">Protection rapprochée et sécurité privée pour sportifs de haut niveau, artistes, dirigeants et leurs familles. Basés à Manchester, nous intervenons dans tout le Royaume-Uni et à l’étranger.</span><span data-l="en">Close protection and private security for elite athletes, artists, business leaders and their families. Based in Manchester, operating across the UK and abroad.</span></p>
+      <p class="home-sub fadein"><span data-l="fr">Protection rapprochée et sécurité privée pour sportifs de haut niveau, artistes, dirigeants et leurs familles. Basés à Manchester, nous intervenons dans tout le Royaume-Uni et à l’étranger.</span><span data-l="en">Close protection and private security for elite athletes, artists, business leaders and their families. Based in Manchester, operating across the UK and abroad.</span><span data-l="es">Protección personal y seguridad privada para deportistas de élite, artistas, directivos y sus familias. Con base en Manchester, operamos en todo el Reino Unido y en el extranjero.</span><span data-l="ar">حماية شخصية وأمن خاص للرياضيين المحترفين والفنانين وكبار المسؤولين وعائلاتهم. مقرنا في مانشستر، ونعمل في جميع أنحاء المملكة المتحدة وخارجها.</span></p>
       <div class="dossier fadein" id="dossier" aria-live="polite">
         <div class="dos-media"><img class="ph" id="dosImg" alt=""><div class="dos-scan"></div><span class="dos-k" id="dosK"></span></div>
         <div class="dos-body">
@@ -488,7 +537,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
       <div class="radar" id="radar">
         <canvas id="rc" aria-hidden="true"></canvas>
         <img class="emb radar-emblem" data-img="emblem" alt="">
-        <div class="hud hud-tr"><span data-l="fr">Heure Manchester</span><span data-l="en">Manchester time</span><b id="hudClock">--:--:--</b></div>
+        <div class="hud hud-tr"><span data-l="fr">Heure Manchester</span><span data-l="en">Manchester time</span><span data-l="es">Hora de Manchester</span><span data-l="ar">توقيت مانشستر</span><b id="hudClock">--:--:--</b></div>
         <div class="hud hud-bl">Manchester<b>53°28′ N · 2°14′ W</b></div>
         <div class="targets" id="targets"></div>
       </div>
@@ -497,7 +546,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
   </div>
   <div class="home-foot">
     <span>Jactin House · Manchester M4 6WX · +44 (0) 7544 548227</span>
-    <span>© 2026 Mansa Security · <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener"><span data-l="fr">Conditions d’utilisation</span><span data-l="en">Terms of service</span></a></span>
+    <span>© 2026 Mansa Security · <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener"><span data-l="fr">Conditions d’utilisation</span><span data-l="en">Terms of service</span><span data-l="es">Condiciones de uso</span><span data-l="ar">شروط الاستخدام</span></a></span>
   </div>
 </section>
 <div id="domains"></div>
@@ -511,9 +560,24 @@ var IMG={"home": "data:image/webp;base64,UklGRoJVAgBXRUJQVlA4WAoAAAAgAAAAPwYAgwM
 (function(){
 var H=document.documentElement, reduce=H.classList.contains('no-anim');
 var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
-var lang=H.classList.contains('l-en')?'en':'fr';
+var LANGS=['fr','en','es','ar'];
+var lang=LANGS.indexOf(H.lang)>=0?H.lang:'fr';
 var esc=function(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
-function L(fr,en){return '<span data-l="fr">'+fr+'</span><span data-l="en">'+en+'</span>'}
+/* Traductions ES / AR indexées par le texte FR (ou « FR|EN » quand un même mot change de sens). Source : i18n_tr.py */
+var TR=/*TR*/{"es":{"Radar":"Radar","Téléphone":"Teléfono","Téléphone|Phone number":"Teléfono","Email":"Correo","Service":"Servicio","Sécurité privée · Manchester · International":"Seguridad privada · Manchester · Internacional","Protection rapprochée":"Protección personal","pour personnalités exposées.":"para personas de alto perfil.","Protection rapprochée et sécurité privée pour sportifs de haut niveau, artistes, dirigeants et leurs familles. Basés à Manchester, nous intervenons dans tout le Royaume-Uni et à l’étranger.":"Protección personal y seguridad privada para deportistas de élite, artistas, directivos y sus familias. Con base en Manchester, operamos en todo el Reino Unido y en el extranjero.","Heure Manchester":"Hora de Manchester","Conditions d’utilisation":"Condiciones de uso","Nos services":"Nuestros servicios","Retour au radar":"Volver al radar","Suivant":"Siguiente","Demander ce service":"Solicitar este servicio","Ce que comprend le service":"Qué incluye el servicio","Pourquoi c’est essentiel":"Por qué es esencial","Le déroulé d’une mission":"Cómo se desarrolla una misión","Découvrir":"Descubrir","Demander une évaluation":"Solicitar una evaluación","Comment ça se passe":"Cómo funciona","De la première question <em>à la mission.</em>":"De la primera pregunta <em>a la misión.</em>","Ce que nous <em>mettons en place.</em>":"Lo que <em>ponemos en marcha.</em>","Conseil & évaluation":"Asesoría y evaluación","Une question de sécurité ? <em>Parlons-en.</em>":"¿Una cuestión de seguridad? <em>Hablemos.</em>","Conseil et évaluation gratuits, sans engagement. Réponse sous 24 h.":"Asesoría y evaluación gratuitas, sin compromiso. Respuesta en 24 h.","Je ne sais pas encore":"Aún no lo sé","Prénom":"Nombre","Nom":"Apellidos","Adresse email":"Correo electrónico","Votre message":"Su mensaje","J’accepte les <a href=\"https://www.mansaenterprise.co.uk/terms-of-service/\" target=\"_blank\" rel=\"noopener\">conditions d’utilisation</a>.":"Acepto las <a href=\"https://www.mansaenterprise.co.uk/terms-of-service/\" target=\"_blank\" rel=\"noopener\">condiciones de uso</a>.","Vos informations restent strictement confidentielles et servent uniquement à répondre à votre demande.":"Sus datos se tratan con estricta confidencialidad y solo se utilizan para responder a su solicitud.","Envoyer ma demande":"Enviar mi solicitud","Adresse":"Dirección","Royaume-Uni":"Reino Unido","Le radar":"El radar","Dates, lieux, nombre de personnes, tout ce que nous devons savoir.":"Fechas, lugares, número de personas, todo lo que debamos saber.","Évaluer":"Evaluar","Nous vous rencontrons, vous écoutons et étudions vos besoins, votre exposition et vos vulnérabilités.":"Nos reunimos con usted, le escuchamos y estudiamos sus necesidades, su exposición y sus vulnerabilidades.","Planifier":"Planificar","Nous rédigeons un plan de sécurité sur mesure, de la protection physique aux interventions d’urgence.":"Elaboramos un plan de seguridad a medida, desde la protección física hasta la respuesta ante emergencias.","Protéger":"Proteger","Notre équipe intervient, au quotidien ou pour un événement, et s’adapte à l’évolution de vos besoins.":"Nuestro equipo interviene, en el día a día o para un evento, y se adapta a la evolución de sus necesidades.","Protection":"Protección","rapprochée":"personal","Une protection personnelle, au quotidien ou pour un événement, construite autour de votre rythme.":"Protección personal, en el día a día o para un evento, organizada en torno a su ritmo de vida.","Une approche personnalisée de la protection rapprochée. Nous étudions vos besoins, puis construisons un plan de sécurité complet qui réduit les risques et préserve votre bien-être.":"Una protección personal hecha a su medida. Estudiamos sus necesidades y después elaboramos un plan de seguridad completo que reduce los riesgos y preserva su bienestar.","Les personnalités sont davantage exposées aux agressions, au harcèlement et aux tentatives de vol. Nos agents forment une barrière physique et sont formés à la désescalade.":"Las personalidades públicas están más expuestas a agresiones, acoso e intentos de robo. Nuestros agentes forman una barrera física y están entrenados en técnicas de desescalada.","Protection quotidienne discrète":"Protección diaria discreta","Des agents qui se fondent dans votre environnement et vous protègent dans vos activités de tous les jours, sans perturber votre quotidien.":"Agentes que se integran en su entorno y le protegen en sus actividades cotidianas, sin alterar su día a día.","Sécurité renforcée pour les événements":"Seguridad reforzada para eventos","Des mesures supplémentaires pour vos apparitions les plus exposées, adaptées aux menaces propres à chaque occasion.":"Medidas adicionales para sus apariciones más expuestas, adaptadas a las amenazas propias de cada ocasión.","Évaluations de sécurité personnalisées":"Evaluaciones de seguridad personalizadas","L’analyse de vos risques et vulnérabilités, qui débouche sur un plan sur mesure.":"El análisis de sus riesgos y vulnerabilidades, que da lugar a un plan a medida.","Solutions de sécurité globales":"Soluciones de seguridad integrales","Une stratégie complète, de la protection physique à la planification des interventions d’urgence.":"Una estrategia completa, desde la protección física hasta la planificación de la respuesta ante emergencias.","Sécurité résidentielle":"Seguridad residencial","Résidentiel":"Residencial","Sécurité":"Seguridad","Sécurité|Event":"Seguridad","résidentielle":"residencial","Alarmes, caméras et télésurveillance pour faire de votre domicile un refuge.":"Alarmas, cámaras y televigilancia para que su hogar sea un refugio.","La sérénité pour votre famille et vos biens. Nous identifions avec vous les points faibles et mettons en place les bonnes mesures, du périmètre jusqu’à l’intérieur.":"Tranquilidad para su familia y su patrimonio. Identificamos con usted los puntos débiles y aplicamos las medidas adecuadas, desde el perímetro hasta el interior.","Paparazzis et fans intrusifs font partie de la vie publique. Contrôle d’accès, vidéosurveillance et sécurité périmétrique font de votre domicile un refuge.":"Los paparazzi y los fans invasivos forman parte de la vida pública. El control de accesos, la videovigilancia y la seguridad perimetral hacen de su hogar un refugio.","Systèmes d’alarme avancés":"Sistemas de alarma avanzados","Des alarmes sur mesure pour détecter toute intrusion et y répondre sans délai.":"Alarmas a medida para detectar cualquier intrusión y responder sin demora.","Caméras de surveillance":"Cámaras de vigilancia","Des caméras haute définition pour surveiller et enregistrer en temps réel, à l’intérieur comme à l’extérieur.":"Cámaras de alta definición para vigilar y grabar en tiempo real, tanto en el interior como en el exterior.","Audits de sécurité":"Auditorías de seguridad","L’examen de votre installation actuelle pour repérer les failles et recommander des améliorations.":"La revisión de su instalación actual para detectar fallos y recomendar mejoras.","Télésurveillance 24 h/24":"Televigilancia 24 h","Une surveillance permanente, avec une réponse immédiate à toute menace.":"Una vigilancia permanente, con respuesta inmediata ante cualquier amenaza.","Installation et maintenance":"Instalación y mantenimiento","Nos propres techniciens assurent l’installation et l’entretien courant.":"Nuestros propios técnicos se encargan de la instalación y del mantenimiento periódico.","Protection globale":"Protección integral","Du périmètre jusqu’aux espaces intérieurs, chaque accès est couvert.":"Del perímetro a los espacios interiores, cada acceso queda cubierto.","Sécurité événementielle":"Seguridad para eventos","Événements":"Eventos","événementielle":"para eventos","Du dîner intime au grand événement public, préparé jusqu’à la dernière entrée.":"De la cena íntima al gran evento público, preparado hasta la última entrada.","Quelle que soit l’ampleur de votre événement, nous adaptons la sécurité au lieu, aux invités et aux risques, avec un accompagnement expert de la préparation jusqu’au départ du dernier invité.":"Sea cual sea la magnitud de su evento, adaptamos la seguridad al lugar, a los invitados y a los riesgos, con un acompañamiento experto desde la preparación hasta la salida del último invitado.","Un événement réussi est un événement où personne ne remarque la sécurité. Tout se joue en amont : flux, accès, scénarios d’urgence.":"Un evento logrado es aquel en el que nadie nota la seguridad. Todo se decide de antemano: flujos, accesos, escenarios de emergencia.","Gestion des foules":"Gestión de multitudes","Maîtriser le flux et le comportement du public pour éviter toute saturation.":"Controlar el flujo y el comportamiento del público para evitar cualquier aglomeración.","Contrôle d’accès":"Control de accesos","Surveiller chaque point d’entrée pour que seules les personnes autorisées entrent.":"Vigilar cada punto de entrada para que solo accedan las personas autorizadas.","Analyse des risques":"Análisis de riesgos","Identifier les risques en amont et les réduire de façon proactive.":"Identificar los riesgos de antemano y reducirlos de forma proactiva.","Plans d’intervention d’urgence":"Planes de respuesta ante emergencias","Des plans rédigés, répétés et appliqués pour chaque scénario d’urgence.":"Planes redactados, ensayados y aplicados para cada escenario de emergencia.","Vidéosurveillance":"Videovigilancia","Vidéo":"Vídeo","surveillance":"vigilancia","Des systèmes sur mesure pour domiciles et locaux professionnels, surveillés jour et nuit.":"Sistemas a medida para viviendas y locales profesionales, vigilados día y noche.","Nos techniciens conçoivent et installent un système adapté à votre propriété, professionnelle ou résidentielle, avec surveillance et enregistrement en temps réel.":"Nuestros técnicos diseñan e instalan un sistema adaptado a su propiedad, profesional o residencial, con vigilancia y grabación en tiempo real.","Une image nette au bon moment change tout : elle dissuade, elle alerte et elle prouve.":"Una imagen nítida en el momento justo lo cambia todo: disuade, alerta y sirve de prueba.","Conception sur mesure":"Diseño a medida","Un système conçu avec vous, selon l’agencement et les risques de votre propriété.":"Un sistema diseñado con usted, según la distribución y los riesgos de su propiedad.","Caméras haut de gamme":"Cámaras de alta gama","Des images nettes et fiables, de jour comme de nuit.":"Imágenes nítidas y fiables, de día y de noche.","Analyse vidéo avancée":"Análisis de vídeo avanzado","La détection en temps réel des menaces potentielles.":"La detección en tiempo real de posibles amenazas.","Surveillance 24 h/24":"Vigilancia 24 h","Une équipe dédiée, en veille permanente, qui réagit à toute activité suspecte.":"Un equipo dedicado, en alerta permanente, que reacciona ante cualquier actividad sospechosa.","Discrète ou dissuasive":"Discreta o disuasoria","Une surveillance discrète des zones sensibles, ou une présence visible qui dissuade.":"Una vigilancia discreta de las zonas sensibles, o una presencia visible que disuade.","Détection et réaction rapides":"Detección y reacción rápidas","Toute activité inhabituelle est repérée et traitée sans attendre.":"Cualquier actividad inusual se detecta y se atiende sin demora.","Conseil":"Asesoría","Avant toute mission,":"Antes de cualquier misión,","un premier échange.":"una primera conversación.","Conseil et évaluation de sécurité gratuits, sans engagement. Réponse sous 24 h.":"Asesoría y evaluación de seguridad gratuitas, sin compromiso. Respuesta en 24 h.","Conseil et évaluation de sécurité, gratuits et sans engagement. Exposez-nous votre situation : nous vous disons concrètement ce qu’il faut mettre en place. Réponse sous 24 h.":"Asesoría y evaluación de seguridad, gratuitas y sin compromiso. Cuéntenos su situación y le diremos, de forma concreta, qué conviene poner en marcha. Respuesta en 24 h.","Gratuit":"Gratis","Sans engagement":"Sin compromiso","Réponse sous 24 h":"Respuesta en 24 h","Confidentiel":"Confidencial","Premier échange":"Primera conversación","Par téléphone, par email ou via le formulaire. Vous nous exposez votre situation en toute confidentialité, et nous vous répondons sous 24 h.":"Por teléfono, por correo electrónico o mediante el formulario. Nos expone su situación con total confidencialidad y le respondemos en 24 h.","Évaluation de sécurité":"Evaluación de seguridad","Nous analysons votre exposition : domicile, déplacements, agenda et lieux fréquentés. Vous repartez avec nos recommandations, que vous travailliez avec nous ou non.":"Analizamos su exposición: domicilio, desplazamientos, agenda y lugares que frecuenta. Se queda con nuestras recomendaciones, trabaje o no con nosotros.","Plan sur mesure":"Plan a medida","Si vous souhaitez aller plus loin, nous vous remettons un plan de protection et un devis détaillé, adaptés à vos besoins.":"Si desea ir más allá, le entregamos un plan de protección y un presupuesto detallado, adaptados a sus necesidades.","Devis":"Presupuesto","Mise en place":"Puesta en marcha","Nos agents interviennent, au quotidien ou pour un événement, à Manchester, dans tout le Royaume-Uni et à l’étranger.":"Nuestros agentes intervienen, en el día a día o para un evento, en Manchester, en todo el Reino Unido y en el extranjero.","Mission":"Misión","Échange":"Conversación","Évaluation":"Evaluación","Plan":"Plan","Contact":"Contacto","Parlons-en,":"Hablemos,","en confidence.":"en confianza.","Une consultation confidentielle et un devis gratuit. Manchester, Royaume-Uni et international.":"Una consulta confidencial y un presupuesto gratuito. Manchester, Reino Unido e internacional.","Décrivez-nous votre situation. Nous revenons vers vous avec une évaluation et un devis gratuit.":"Descríbanos su situación. Le responderemos con una evaluación y un presupuesto gratuito.","Domicile":"Domicilio","Stade":"Estadio","Hôtel":"Hotel","Aéroport":"Aeropuerto","Accès":"Accesos","Parking":"Parking","Abords":"Alrededores","Vous":"Usted","24 h":"24 h"},"ar":{"Radar":"الرادار","Téléphone":"الهاتف","Téléphone|Phone number":"رقم الهاتف","Email":"البريد الإلكتروني","Service":"الخدمة","Sécurité privée · Manchester · International":"أمن خاص · مانشستر · دولي","Protection rapprochée":"الحماية الشخصية","pour personnalités exposées.":"للشخصيات البارزة.","Protection rapprochée et sécurité privée pour sportifs de haut niveau, artistes, dirigeants et leurs familles. Basés à Manchester, nous intervenons dans tout le Royaume-Uni et à l’étranger.":"حماية شخصية وأمن خاص للرياضيين المحترفين والفنانين وكبار المسؤولين وعائلاتهم. مقرنا في مانشستر، ونعمل في جميع أنحاء المملكة المتحدة وخارجها.","Heure Manchester":"توقيت مانشستر","Conditions d’utilisation":"شروط الاستخدام","Nos services":"خدماتنا","Retour au radar":"العودة إلى الرادار","Suivant":"التالي","Demander ce service":"طلب هذه الخدمة","Ce que comprend le service":"ما تشمله الخدمة","Pourquoi c’est essentiel":"لماذا هذا ضروري","Le déroulé d’une mission":"مراحل المهمة","Découvrir":"اكتشف","Demander une évaluation":"طلب تقييم","Comment ça se passe":"كيف نعمل","De la première question <em>à la mission.</em>":"من السؤال الأول <em>إلى المهمة.</em>","Ce que nous <em>mettons en place.</em>":"ما <em>نوفره لكم.</em>","Conseil & évaluation":"الاستشارة والتقييم","Une question de sécurité ? <em>Parlons-en.</em>":"سؤال أمني؟ <em>لنتحدث.</em>","Conseil et évaluation gratuits, sans engagement. Réponse sous 24 h.":"استشارة وتقييم مجانيان، دون أي التزام. نرد خلال 24 ساعة.","Je ne sais pas encore":"لم أحدد بعد","Prénom":"الاسم الأول","Nom":"اسم العائلة","Adresse email":"البريد الإلكتروني","Votre message":"رسالتكم","J’accepte les <a href=\"https://www.mansaenterprise.co.uk/terms-of-service/\" target=\"_blank\" rel=\"noopener\">conditions d’utilisation</a>.":"أوافق على <a href=\"https://www.mansaenterprise.co.uk/terms-of-service/\" target=\"_blank\" rel=\"noopener\">شروط الاستخدام</a>.","Vos informations restent strictement confidentielles et servent uniquement à répondre à votre demande.":"تبقى معلوماتكم سرية تمامًا، ولا تُستخدم إلا للرد على طلبكم.","Envoyer ma demande":"إرسال الطلب","Adresse":"العنوان","Royaume-Uni":"المملكة المتحدة","Le radar":"الرادار","Dates, lieux, nombre de personnes, tout ce que nous devons savoir.":"التواريخ، الأماكن، عدد الأشخاص، وكل ما ينبغي أن نعرفه.","Évaluer":"التقييم","Nous vous rencontrons, vous écoutons et étudions vos besoins, votre exposition et vos vulnérabilités.":"نلتقي بكم ونستمع إليكم وندرس احتياجاتكم ومدى تعرضكم ونقاط الضعف لديكم.","Planifier":"التخطيط","Nous rédigeons un plan de sécurité sur mesure, de la protection physique aux interventions d’urgence.":"نعد خطة أمنية مصممة لكم، من الحماية الجسدية إلى الاستجابة للطوارئ.","Protéger":"الحماية","Notre équipe intervient, au quotidien ou pour un événement, et s’adapte à l’évolution de vos besoins.":"يتولى فريقنا المهمة، يوميًا أو لمناسبة محددة، ويتكيف مع تطور احتياجاتكم.","Protection":"الحماية","rapprochée":"الشخصية","Une protection personnelle, au quotidien ou pour un événement, construite autour de votre rythme.":"حماية شخصية، يومية أو لمناسبة محددة، مبنية حول إيقاع حياتكم.","Une approche personnalisée de la protection rapprochée. Nous étudions vos besoins, puis construisons un plan de sécurité complet qui réduit les risques et préserve votre bien-être.":"نهج مخصص للحماية الشخصية. ندرس احتياجاتكم، ثم نضع خطة أمنية متكاملة تحد من المخاطر وتحافظ على راحتكم.","Les personnalités sont davantage exposées aux agressions, au harcèlement et aux tentatives de vol. Nos agents forment une barrière physique et sont formés à la désescalade.":"الشخصيات العامة أكثر عرضة للاعتداء والمضايقة ومحاولات السرقة. يشكل عناصرنا حاجزًا جسديًا، وهم مدربون على تهدئة المواقف.","Protection quotidienne discrète":"حماية يومية بتكتم","Des agents qui se fondent dans votre environnement et vous protègent dans vos activités de tous les jours, sans perturber votre quotidien.":"عناصر يندمجون في محيطكم ويحمونكم في أنشطتكم اليومية دون أن يربكوا روتينكم.","Sécurité renforcée pour les événements":"أمن معزز للمناسبات","Des mesures supplémentaires pour vos apparitions les plus exposées, adaptées aux menaces propres à chaque occasion.":"إجراءات إضافية لظهوركم العلني الأكثر عرضة، مكيفة مع التهديدات الخاصة بكل مناسبة.","Évaluations de sécurité personnalisées":"تقييمات أمنية مخصصة","L’analyse de vos risques et vulnérabilités, qui débouche sur un plan sur mesure.":"تحليل المخاطر ونقاط الضعف الخاصة بكم، وصولًا إلى خطة مصممة لكم.","Solutions de sécurité globales":"حلول أمنية شاملة","Une stratégie complète, de la protection physique à la planification des interventions d’urgence.":"استراتيجية متكاملة، من الحماية الجسدية إلى التخطيط للاستجابة للطوارئ.","Sécurité résidentielle":"الأمن السكني","Résidentiel":"المسكن","Sécurité":"الأمن","Sécurité|Event":"أمن","résidentielle":"السكني","Alarmes, caméras et télésurveillance pour faire de votre domicile un refuge.":"أنظمة إنذار وكاميرات ومراقبة عن بعد لتجعل من منزلكم ملاذًا آمنًا.","La sérénité pour votre famille et vos biens. Nous identifions avec vous les points faibles et mettons en place les bonnes mesures, du périmètre jusqu’à l’intérieur.":"الطمأنينة لعائلتكم وممتلكاتكم. نحدد معكم نقاط الضعف ونطبق الإجراءات المناسبة، من المحيط الخارجي حتى الداخل.","Paparazzis et fans intrusifs font partie de la vie publique. Contrôle d’accès, vidéosurveillance et sécurité périmétrique font de votre domicile un refuge.":"المصورون المتطفلون والمعجبون المزعجون جزء من الحياة العامة. التحكم في الدخول والمراقبة بالفيديو وتأمين المحيط تجعل من منزلكم ملاذًا آمنًا.","Systèmes d’alarme avancés":"أنظمة إنذار متطورة","Des alarmes sur mesure pour détecter toute intrusion et y répondre sans délai.":"أنظمة إنذار مصممة لكم لرصد أي اقتحام والاستجابة له فورًا.","Caméras de surveillance":"كاميرات المراقبة","Des caméras haute définition pour surveiller et enregistrer en temps réel, à l’intérieur comme à l’extérieur.":"كاميرات عالية الدقة للمراقبة والتسجيل في الوقت الفعلي، داخل المنزل وخارجه.","Audits de sécurité":"التدقيق الأمني","L’examen de votre installation actuelle pour repérer les failles et recommander des améliorations.":"فحص منظومتكم الحالية لرصد الثغرات واقتراح التحسينات.","Télésurveillance 24 h/24":"مراقبة عن بعد على مدار الساعة","Une surveillance permanente, avec une réponse immédiate à toute menace.":"مراقبة مستمرة مع استجابة فورية لأي تهديد.","Installation et maintenance":"التركيب والصيانة","Nos propres techniciens assurent l’installation et l’entretien courant.":"يتولى فنيونا التركيب والصيانة الدورية.","Protection globale":"حماية شاملة","Du périmètre jusqu’aux espaces intérieurs, chaque accès est couvert.":"من المحيط الخارجي إلى المساحات الداخلية، كل مدخل مؤمن.","Sécurité événementielle":"أمن الفعاليات","Événements":"الفعاليات","événementielle":"الفعاليات","Du dîner intime au grand événement public, préparé jusqu’à la dernière entrée.":"من العشاء الخاص إلى الفعالية العامة الكبرى، نستعد لكل شيء حتى آخر مدخل.","Quelle que soit l’ampleur de votre événement, nous adaptons la sécurité au lieu, aux invités et aux risques, avec un accompagnement expert de la préparation jusqu’au départ du dernier invité.":"مهما كان حجم فعاليتكم، نكيف الإجراءات الأمنية مع المكان والضيوف والمخاطر، مع مرافقة خبيرة من مرحلة التحضير حتى مغادرة آخر ضيف.","Un événement réussi est un événement où personne ne remarque la sécurité. Tout se joue en amont : flux, accès, scénarios d’urgence.":"الفعالية الناجحة هي التي لا يلاحظ فيها أحد وجود الأمن. كل شيء يحسم مسبقًا: حركة الحضور، والمداخل، وسيناريوهات الطوارئ.","Gestion des foules":"إدارة الحشود","Maîtriser le flux et le comportement du public pour éviter toute saturation.":"ضبط حركة الجمهور وسلوكه لتفادي أي اكتظاظ.","Contrôle d’accès":"التحكم في الدخول","Surveiller chaque point d’entrée pour que seules les personnes autorisées entrent.":"مراقبة كل نقطة دخول كي لا يدخل إلا المصرح لهم.","Analyse des risques":"تحليل المخاطر","Identifier les risques en amont et les réduire de façon proactive.":"تحديد المخاطر مسبقًا والحد منها بشكل استباقي.","Plans d’intervention d’urgence":"خطط الاستجابة للطوارئ","Des plans rédigés, répétés et appliqués pour chaque scénario d’urgence.":"خطط مكتوبة ومجربة ومطبقة لكل سيناريو طارئ.","Vidéosurveillance":"المراقبة بالفيديو","Vidéo":"المراقبة","surveillance":"بالفيديو","Des systèmes sur mesure pour domiciles et locaux professionnels, surveillés jour et nuit.":"أنظمة مصممة خصيصًا للمنازل والمقار المهنية، تخضع للمراقبة ليلًا ونهارًا.","Nos techniciens conçoivent et installent un système adapté à votre propriété, professionnelle ou résidentielle, avec surveillance et enregistrement en temps réel.":"يصمم فنيونا ويركبون نظامًا ملائمًا لعقاركم، مهنيًا كان أم سكنيًا، مع مراقبة وتسجيل في الوقت الفعلي.","Une image nette au bon moment change tout : elle dissuade, elle alerte et elle prouve.":"صورة واضحة في اللحظة المناسبة تغير كل شيء: فهي تردع وتنبه وتشكل دليلًا.","Conception sur mesure":"تصميم حسب الطلب","Un système conçu avec vous, selon l’agencement et les risques de votre propriété.":"نظام نصممه معكم وفق تخطيط عقاركم ومخاطره.","Caméras haut de gamme":"كاميرات فائقة الجودة","Des images nettes et fiables, de jour comme de nuit.":"صور واضحة وموثوقة، ليلًا ونهارًا.","Analyse vidéo avancée":"تحليل فيديو متقدم","La détection en temps réel des menaces potentielles.":"رصد التهديدات المحتملة في الوقت الفعلي.","Surveillance 24 h/24":"مراقبة على مدار الساعة","Une équipe dédiée, en veille permanente, qui réagit à toute activité suspecte.":"فريق مخصص في حالة تأهب دائمة، يتعامل مع أي نشاط مريب.","Discrète ou dissuasive":"خفية أو رادعة","Une surveillance discrète des zones sensibles, ou une présence visible qui dissuade.":"مراقبة خفية للمناطق الحساسة، أو حضور ظاهر يردع.","Détection et réaction rapides":"رصد واستجابة سريعان","Toute activité inhabituelle est repérée et traitée sans attendre.":"يرصد أي نشاط غير اعتيادي ويعالج دون تأخير.","Conseil":"الاستشارة","Avant toute mission,":"قبل أي مهمة،","un premier échange.":"نبدأ بالحوار.","Conseil et évaluation de sécurité gratuits, sans engagement. Réponse sous 24 h.":"استشارة وتقييم أمني مجانيان، دون أي التزام. نرد خلال 24 ساعة.","Conseil et évaluation de sécurité, gratuits et sans engagement. Exposez-nous votre situation : nous vous disons concrètement ce qu’il faut mettre en place. Réponse sous 24 h.":"استشارة وتقييم أمني، مجانًا ودون أي التزام. اعرضوا علينا وضعكم، وسنخبركم بوضوح بالإجراءات اللازمة. نرد خلال 24 ساعة.","Gratuit":"مجاني","Sans engagement":"دون التزام","Réponse sous 24 h":"رد خلال 24 ساعة","Confidentiel":"سري","Premier échange":"الحوار الأول","Par téléphone, par email ou via le formulaire. Vous nous exposez votre situation en toute confidentialité, et nous vous répondons sous 24 h.":"عبر الهاتف أو البريد الإلكتروني أو النموذج. تعرضون علينا وضعكم بسرية تامة، ونرد عليكم خلال 24 ساعة.","Évaluation de sécurité":"التقييم الأمني","Nous analysons votre exposition : domicile, déplacements, agenda et lieux fréquentés. Vous repartez avec nos recommandations, que vous travailliez avec nous ou non.":"نحلل مدى تعرضكم: المسكن والتنقلات والجدول الزمني والأماكن التي ترتادونها. وتحتفظون بتوصياتنا، سواء عملتم معنا أم لا.","Plan sur mesure":"خطة مخصصة","Si vous souhaitez aller plus loin, nous vous remettons un plan de protection et un devis détaillé, adaptés à vos besoins.":"إن رغبتم في المضي قدمًا، نقدم لكم خطة حماية وعرض سعر مفصلًا، مصممين وفق احتياجاتكم.","Devis":"عرض سعر","Mise en place":"التنفيذ","Nos agents interviennent, au quotidien ou pour un événement, à Manchester, dans tout le Royaume-Uni et à l’étranger.":"يباشر عناصرنا مهامهم، يوميًا أو لمناسبة محددة، في مانشستر وفي جميع أنحاء المملكة المتحدة وخارجها.","Mission":"المهمة","Échange":"الحوار","Évaluation":"التقييم","Plan":"الخطة","Contact":"تواصل معنا","Parlons-en,":"لنتحدث،","en confidence.":"بكل سرية.","Une consultation confidentielle et un devis gratuit. Manchester, Royaume-Uni et international.":"استشارة سرية وعرض سعر مجاني. مانشستر، المملكة المتحدة وخارجها.","Décrivez-nous votre situation. Nous revenons vers vous avec une évaluation et un devis gratuit.":"صفوا لنا وضعكم، وسنعود إليكم بتقييم وعرض سعر مجاني.","Domicile":"المنزل","Stade":"الملعب","Hôtel":"الفندق","Aéroport":"المطار","Accès":"المداخل","Parking":"المواقف","Abords":"المحيط","Vous":"أنتم","24 h":"24 ساعة"}}/*/TR*/;
+var MISS=window.__i18nMiss=[];
+function unesc(x){return String(x).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&amp;/g,'&')}
+function tr(l,fr,en){
+  if(l==='fr')return fr; if(l==='en')return en;
+  var t=TR[l]||{}, v=t[fr+'|'+en]; if(v==null)v=t[fr];
+  if(v==null){var uf=unesc(fr),ue=unesc(en);v=t[uf+'|'+ue];if(v==null)v=t[uf];if(v!=null&&uf!==fr)v=esc(v)}
+  if(v==null){if(fr&&MISS.indexOf(fr)<0)MISS.push(fr);v=en}
+  return v;
+}
+function L(fr,en){return LANGS.map(function(l){return '<span data-l="'+l+'">'+tr(l,fr,en)+'</span>'}).join('')}
+function trTree(fr,en,l){if(typeof fr==='string')return tr(l,fr,en);if(Array.isArray(fr))return fr.map(function(x,i){return trTree(x,en[i],l)});if(fr&&typeof fr==='object'){var o={};for(var k in fr)o[k]=trTree(fr[k],en[k],l);return o}return fr}
+function ph(fr,en){return LANGS.map(function(l){return ' data-ph-'+l+'="'+esc(tr(l,fr,en))+'"'}).join('')}
+function arrow(){return lang==='ar'?'←':'→'}
 var touch=false; try{touch=window.matchMedia('(hover: none)').matches}catch(e){}
 
 /* ---------- Textes de l'interface (FR / EN) ---------- */
@@ -529,7 +593,17 @@ var T={
      idleK:'Our services',freeK:'Free · no obligation',idleT:'Choose a service',idleP:'Close protection, residential security, event security and CCTV.',idleH:'',
      brg:'BRG',ring:'RING',rings:['I · CLOSE','II · PRIVACY','III · TRAVEL','IV · THREAT'],
      eFirst:'Please enter your first name.',eLast:'Please enter your last name.',eMsg:'Tell us briefly what you need.',eMail:'Please enter your email address.',eMailBad:'This email address looks incomplete.',eTerms:'Please accept the terms of service to continue.',
-     doneK:'Request ready',doneH:function(n){return 'Thank you, '+n+'.'},doneP:function(s){return (s?'Your request for '+s.toLowerCase()+' is ready. ':'Your request is ready. ')+'This is a preview of the new site: once it is live, your message goes straight to the Mansa team, who will contact you to arrange a confidential consultation.'}}
+     doneK:'Request ready',doneH:function(n){return 'Thank you, '+n+'.'},doneP:function(s){return (s?'Your request for '+s.toLowerCase()+' is ready. ':'Your request is ready. ')+'This is a preview of the new site: once it is live, your message goes straight to the Mansa team, who will contact you to arrange a confidential consultation.'}},
+ es:{menu:'Menú',close:'Cerrar',copy:'Copiar',copied:'Copiado',selected:'Seleccionado',enter:'Entrar',
+     hint:'Pase el cursor sobre un servicio y haga clic para abrirlo',hintTouch:'Toque un servicio para abrirlo',
+     idleK:'Nuestros servicios',freeK:'Gratis · sin compromiso',idleT:'Elija un servicio',idleP:'Protección personal, seguridad residencial, seguridad para eventos y videovigilancia.',idleH:'',
+     eFirst:'Indique su nombre.',eLast:'Indique sus apellidos.',eMsg:'Describa brevemente lo que necesita.',eMail:'Indique su correo electrónico.',eMailBad:'Esta dirección de correo parece incompleta.',eTerms:'Acepte las condiciones de uso para continuar.',
+     doneK:'Solicitud lista',doneH:function(n){return 'Gracias, '+n+'.'},doneP:function(s){return (s?'Su solicitud de '+s.toLowerCase()+' está lista. ':'Su solicitud está lista. ')+'Esta es una vista previa del nuevo sitio: una vez publicado, su mensaje llegará directamente al equipo de Mansa, que se pondrá en contacto con usted para organizar una consulta confidencial.'}},
+ ar:{menu:'القائمة',close:'إغلاق',copy:'نسخ',copied:'تم النسخ',selected:'تم التحديد',enter:'دخول',
+     hint:'مرر المؤشر على خدمة وانقر لفتحها',hintTouch:'المس خدمة لفتحها',
+     idleK:'خدماتنا',freeK:'مجاني · دون التزام',idleT:'اختر خدمة',idleP:'الحماية الشخصية، والأمن السكني، وأمن الفعاليات، والمراقبة بالفيديو.',idleH:'',
+     eFirst:'يرجى إدخال الاسم الأول.',eLast:'يرجى إدخال اسم العائلة.',eMsg:'يرجى وصف طلبكم باختصار.',eMail:'يرجى إدخال البريد الإلكتروني.',eMailBad:'يبدو أن عنوان البريد الإلكتروني غير مكتمل.',eTerms:'يرجى الموافقة على شروط الاستخدام للمتابعة.',
+     doneK:'الطلب جاهز',doneH:function(n){return 'شكرًا، '+n+'.'},doneP:function(s){return (s?'طلبكم بخصوص «'+s+'» جاهز. ':'طلبكم جاهز. ')+'هذه نسخة تجريبية من الموقع الجديد: بعد إطلاقه، ستصل رسالتكم مباشرة إلى فريق Mansa الذي سيتواصل معكم لترتيب استشارة سرية.'}}
 };
 
 /* ---------- Méthode commune ---------- */
@@ -597,7 +671,7 @@ var D=[
       p:'A confidential consultation and a free quote. Manchester, the UK and abroad.',
       i:'Tell us about your situation. We come back to you with an assessment and a free quote.'}}
 ];
-var byId={}; D.forEach(function(d,i){d.k=i;byId[d.id]=d});
+var byId={}; D.forEach(function(d,i){d.k=i;byId[d.id]=d;d.es=trTree(d.fr,d.en,'es');d.ar=trTree(d.fr,d.en,'ar')});
 function ringOf(r){return r<=.25?0:r<=.5?1:r<=.75?2:3}
 function pad3(n){n=Math.round((n%360+360)%360);return ('00'+n).slice(-3)}
 var ROMAN=['I','II','III','IV'];
@@ -637,13 +711,14 @@ var CV={
             ['Tailored plan','If you want to go further, we provide a protection plan and a detailed quote, built around your needs.','Quote',1],
             ['Deployment','Our officers step in, day to day or for a single event, in Manchester, across the UK and abroad.','Assignment',1]]}
 };
+CV.steps.es=trTree(CV.steps.fr,CV.steps.en,'es'); CV.steps.ar=trTree(CV.steps.fr,CV.steps.en,'ar');
 function approachHTML(d){
   var ST=CV.steps;
   var facts=CV.facts.map(function(f){return '<li>'+L(f[0],f[1])+'</li>'}).join('');
   var SH=[['Échange','Conversation'],['Évaluation','Assessment'],['Plan','Plan'],['Mission','Assignment']];
   var dots=ST.fr.map(function(x,i){return '<button type="button" data-cv="'+i+'" aria-label="'+esc(x[0])+'"><b>0'+(i+1)+'</b><span>'+L(SH[i][0],SH[i][1])+'</span></button>'}).join('');
   var steps=ST.fr.map(function(x,i){var e=ST.en[i];return '<li class="cv-step" data-cvs="'+i+'"><span class="n">0'+(i+1)+' <span class="cv-badge'+(x[3]?' ghost':'')+'">'+L(x[2],e[2])+'</span></span><h3>'+L(x[0],e[0])+'</h3><p>'+L(esc(x[1]),esc(e[1]))+'</p></li>'}).join('');
-  var cards=D.filter(function(x){return x.type==='svc'}).map(function(x){return '<li class="rv"><button class="cv-card" type="button" data-go="'+x.id+'"><img class="ph" src="'+IMG[x.img]+'" alt=""><span class="t"><strong>'+L(x.fr.lab,x.en.lab)+'</strong><small>'+L('Découvrir','Discover')+' →</small></span></button></li>'}).join('');
+  var cards=D.filter(function(x){return x.type==='svc'}).map(function(x){return '<li class="rv"><button class="cv-card" type="button" data-go="'+x.id+'"><img class="ph" src="'+IMG[x.img]+'" alt=""><span class="t"><strong>'+L(x.fr.lab,x.en.lab)+'</strong><small>'+L('Découvrir','Discover')+' <span class="arr">→</span></small></span></button></li>'}).join('');
   var ask='<button class="btn btn-or" type="button" data-go="contact" data-svc="'+d.k+'">'+L('Demander une évaluation','Request an assessment')+'</button>';
   return heroBlock(d,ask+backBtn())+
   '<section class="dm-sec"><span class="kicker rv">'+L('Comment ça se passe','How it works')+'</span><h2 class="dm-h2 rv">'+L('De la première question <em>à la mission.</em>','From the first question <em>to the assignment.</em>')+'</h2>'+
@@ -666,14 +741,14 @@ function contactHTML(d){
    '<div class="field"><label for="f-last">'+L('Nom','Last name')+' <b>*</b></label><input id="f-last" name="last" autocomplete="family-name" required><span class="msg" aria-live="polite"></span></div>'+
    '<div class="field"><label for="f-email">'+L('Adresse email','Email address')+' <b>*</b></label><input id="f-email" name="email" type="email" autocomplete="email" required><span class="msg" aria-live="polite"></span></div>'+
    '<div class="field"><label for="f-phone">'+L('Téléphone','Phone number')+'</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"><span class="msg"></span></div>'+
-   '<div class="field full"><span class="lbl" id="l-service">Service</span><div class="chips" role="group" aria-labelledby="l-service" id="chips">'+chips+'</div></div>'+
-   '<div class="field full"><label for="f-msg">'+L('Votre message','Your message')+' <b>*</b></label><textarea id="f-msg" name="message" data-ph-fr="Dates, lieux, nombre de personnes, tout ce que nous devons savoir." data-ph-en="Dates, locations, number of people, anything we should know." required></textarea><span class="msg" aria-live="polite"></span></div>'+
+   '<div class="field full"><span class="lbl" id="l-service">'+L('Service','Service')+'</span><div class="chips" role="group" aria-labelledby="l-service" id="chips">'+chips+'</div></div>'+
+   '<div class="field full"><label for="f-msg">'+L('Votre message','Your message')+' <b>*</b></label><textarea id="f-msg" name="message"'+ph('Dates, lieux, nombre de personnes, tout ce que nous devons savoir.','Dates, locations, number of people, anything we should know.')+' required></textarea><span class="msg" aria-live="polite"></span></div>'+
    '<div class="field full"><label class="check" for="f-terms"><input id="f-terms" type="checkbox" required><span>'+L('J’accepte les <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener">conditions d’utilisation</a>.','I agree to the <a href="https://www.mansaenterprise.co.uk/terms-of-service/" target="_blank" rel="noopener">terms of service</a>.')+'</span></label><span class="msg" aria-live="polite"></span></div>'+
    '<div class="form-foot"><small>'+L('Vos informations restent strictement confidentielles et servent uniquement à répondre à votre demande.','Your details are treated in strict confidence and used only to answer your request.')+'</small><button class="btn btn-or" type="submit">'+L('Envoyer ma demande','Send my request')+'</button></div>'+
   '</form>'+
   '<aside class="coords rv">'+
    '<div class="coord"><small>'+L('Téléphone','Telephone')+'</small><div class="coord-row"><span class="coord-v" id="c-tel">+44 (0) 7544 548227</span><button class="copy" type="button" data-copy="c-tel"></button></div></div>'+
-   '<div class="coord"><small>Email</small><div class="coord-row"><span class="coord-v" id="c-mail">info@mansasecurity.co.uk</span><button class="copy" type="button" data-copy="c-mail"></button></div></div>'+
+   '<div class="coord"><small>'+L('Email','Email')+'</small><div class="coord-row"><span class="coord-v" id="c-mail">info@mansasecurity.co.uk</span><button class="copy" type="button" data-copy="c-mail"></button></div></div>'+
    '<div class="coord"><small>'+L('Adresse','Address')+'</small><address>Mansa Security<br>Jactin House<br>Manchester M4 6WX<br>'+L('Royaume-Uni','United Kingdom')+'</address></div>'+
    '<div class="coord"><small>Instagram</small><a class="ig" href="https://www.instagram.com/mansasecurity/" target="_blank" rel="noopener">@mansasecurity</a></div>'+
   '</aside></div></section>'+nextBlock(d)+foot;
@@ -711,9 +786,7 @@ D.forEach(function(d){
   var side=d.side?(d.side==='l'?'side-l':''):(Math.sin(rad)<-.05?'side-l':'');
   var bt=document.createElement('button'); bt.type='button'; bt.className='tgt tgt--'+d.type+' '+side; bt.setAttribute('data-t',d.id);
   bt.style.setProperty('--x',x+'%'); bt.style.setProperty('--y',y+'%');
-  bt.innerHTML='<span class="tgt-brk"></span><span class="tgt-mark"></span><span class="tgt-lab"><span>'+L('<span class="long">'+d.fr.lab+'</span>','<span class="long">'+d.en.lab+'</span>')+'</span></span>';
-  // libellé court sur mobile
-  var lab=bt.querySelector('.tgt-lab>span:last-child'); lab.insertAdjacentHTML('beforeend','<span class="short-l">'+L(d.fr.short,d.en.short)+'</span>');
+  bt.innerHTML='<span class="tgt-brk"></span><span class="tgt-mark"></span><span class="tgt-lab"><span><span class="long">'+L(d.fr.lab,d.en.lab)+'</span><span class="short-l">'+L(d.fr.short,d.en.short)+'</span></span></span>';
   d.el=bt; tWrap.appendChild(bt);
 });
 var mq=window.matchMedia('(max-width:900px)');
@@ -732,7 +805,7 @@ function renderDossier(){
     var d=locked, x=d[lang];
     dossier.classList.add('locked');
     $('#dosK').textContent=d.type==='svc'?t.idleK:(d.id==='approach'?t.freeK:'Mansa Security');
-    $('#dosT').textContent=x.lab; $('#dosP').textContent=x.p; $('#dosGo').textContent=t.enter+' →';
+    $('#dosT').textContent=x.lab; $('#dosP').textContent=x.p; $('#dosGo').textContent=t.enter+' '+arrow();
     if(dosImg.getAttribute('data-k')!==d.img){dosImg.classList.add('swap');setTimeout(function(){dosImg.src=IMG[d.img];dosImg.setAttribute('data-k',d.img);dosImg.classList.remove('swap')},180)}
     dossier.classList.remove('flash'); void dossier.offsetWidth; dossier.classList.add('flash');
   }
@@ -853,6 +926,7 @@ var cvScene=(function(){
   var ROUTE=[[.12,.68],[.30,.68],[.30,.36],[.46,.36],[.46,.20],[.64,.20],[.64,.52],[.80,.52],[.80,.68],[.93,.68],[.93,.36]];
   var PIDX=[0,4,8,10], OFFICE=[.64,.84];
   var MARKS={fr:['Accès','Parking','Abords'],en:['Access','Parking','Surroundings']};
+  ['es','ar'].forEach(function(l){PLACES[l]=trTree(PLACES.fr,PLACES.en,l);MARKS[l]=trTree(MARKS.fr,MARKS.en,l)});
   function size(){dpr=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
   function box(){var mob=W<520;return {x:W*.06,y:H*(mob?.2:.17),w:W*.88,h:H*(mob?.6:.64)}}
   function P(p){var b=box();return [b.x+p[0]*b.w,b.y+p[1]*b.h]}
@@ -860,8 +934,8 @@ var cvScene=(function(){
   function lens(){segL=[];totL=0;for(var i=1;i<ROUTE.length;i++){var a=P(ROUTE[i-1]),b=P(ROUTE[i]);var l=Math.hypot(b[0]-a[0],b[1]-a[1]);segL.push(l);totL+=l}}
   function at(u){var d=u*totL;for(var i=0;i<segL.length;i++){if(d<=segL[i]||i===segL.length-1){var a=P(ROUTE[i]),b=P(ROUTE[i+1]),k=segL[i]?Math.min(1,d/segL[i]):0;return {x:a[0]+(b[0]-a[0])*k,y:a[1]+(b[1]-a[1])*k,dx:(b[0]-a[0])/(segL[i]||1),dy:(b[1]-a[1])/(segL[i]||1)}}d-=segL[i]}}
   function uAt(idx){var d=0;for(var i=0;i<idx;i++)d+=segL[i];return d/totL}
-  function font(px,italic){cx.font=(italic?'italic 400 ':'400 ')+px+'px '+(italic?'"Cormorant Garamond", serif':'Jost, sans-serif')}
-  function label(txt,x,y,a,align,hi){font(Math.max(9.5,Math.min(11.5,W*.017)));cx.textAlign=align||'left';cx.textBaseline='middle';cx.fillStyle='rgba('+(hi?GOLD:'240,233,218')+','+a+')';cx.fillText(txt.toUpperCase().split('').join(String.fromCharCode(8202)),x,y)}
+  function font(px,disp){var ar=H_lang()==='ar';cx.font=(disp&&!ar?'italic ':'')+'400 '+px+'px '+(disp?'"Cormorant Garamond", Amiri, serif':'Jost, "IBM Plex Sans Arabic", sans-serif')}
+  function label(txt,x,y,a,align,hi){var ar=H_lang()==='ar';font(Math.max(9.5,Math.min(11.5,W*.017))+(ar?2.5:0));cx.textAlign=align||'left';cx.textBaseline='middle';cx.fillStyle='rgba('+(hi?GOLD:'240,233,218')+','+a+')';cx.fillText(ar?txt:txt.toUpperCase().split('').join(String.fromCharCode(8202)),x,y)}
   function streets(a){
     var b=box();cx.lineWidth=1;cx.strokeStyle='rgba('+G2+','+(.09*a)+')';cx.beginPath();
     [.04,.2,.36,.52,.68,.84,.98].forEach(function(y){cx.moveTo(b.x-10,b.y+y*b.h);cx.lineTo(b.x+b.w+10,b.y+y*b.h)});
@@ -885,8 +959,8 @@ var cvScene=(function(){
       var x=(1-dir)*(1-dir)*you[0]+2*(1-dir)*dir*mx+dir*dir*of[0],y=(1-dir)*(1-dir)*you[1]+2*(1-dir)*dir*my+dir*dir*of[1];
       cx.beginPath();cx.arc(x,y,2.6,0,7);cx.fillStyle='rgba(236,228,206,'+(a*(1-Math.abs(.5-k)))+')';cx.fill()}
     for(var r=0;r<3;r++){var q=((t*.6+r/3)%1);cx.beginPath();cx.arc(you[0],you[1],8+q*46,0,7);cx.strokeStyle='rgba('+GOLD+','+(a*.55*(1-q))+')';cx.stroke()}
-    [[you,lang==='fr'?'Vous':'You'],[of,'Mansa · Manchester']].forEach(function(n){cx.beginPath();cx.arc(n[0][0],n[0][1],5,0,7);cx.fillStyle='rgba(236,228,206,'+a+')';cx.fill();var r=n[0][0]>W*.55;label(n[1],n[0][0]+(r?6:14),n[0][1]+18,.9*a,r?'right':'left',true)});
-    var mid=[(you[0]+of[0])/2,Math.min(you[1],of[1])-H*.11];font(Math.max(22,W*.045),true);cx.textAlign='center';cx.fillStyle='rgba('+GOLD+','+(.9*a)+')';cx.fillText('24 h',mid[0],mid[1]);
+    [[you,tr(lang,'Vous','You')],[of,'Mansa · Manchester']].forEach(function(n){cx.beginPath();cx.arc(n[0][0],n[0][1],5,0,7);cx.fillStyle='rgba(236,228,206,'+a+')';cx.fill();var r=n[0][0]>W*.55;label(n[1],n[0][0]+(r?6:14),n[0][1]+18,.9*a,r?'right':'left',true)});
+    var mid=[(you[0]+of[0])/2,Math.min(you[1],of[1])-H*.11];font(Math.max(22,W*.045),true);cx.textAlign='center';cx.fillStyle='rgba('+GOLD+','+(.9*a)+')';cx.fillText(tr(lang,'24 h','24 h'),mid[0],mid[1]);
   }
   // 02 évaluation
   function s1(a,t){
@@ -969,7 +1043,7 @@ form.addEventListener('submit',function(e){
   if(!ok){var first=$('.field.err input,.field.err textarea',form);if(first)first.focus();return}
   var sel=$('#chips .chip[aria-pressed="true"]'), k=sel?+sel.getAttribute('data-k'):-1;
   var name=esc(v('f-first'));
-  form.innerHTML='<div class="done" role="status">'+['fr','en'].map(function(l){var s=k>=0?D[k][l].lab:'';return '<div data-l="'+l+'"><span class="kicker" style="margin-bottom:0">'+T[l].doneK+'</span><h3>'+T[l].doneH(name)+'</h3><p>'+esc(T[l].doneP(s))+'</p></div>'}).join('')+'</div>';
+  form.innerHTML='<div class="done" role="status">'+LANGS.map(function(l){var s=k>=0?D[k][l].lab:'';return '<div data-l="'+l+'"><span class="kicker" style="margin-bottom:0">'+T[l].doneK+'</span><h3>'+T[l].doneH(name)+'</h3><p>'+esc(T[l].doneP(s))+'</p></div>'}).join('')+'</div>';
 });
 
 /* ---------- Copier ---------- */
@@ -983,17 +1057,22 @@ copyBtns.forEach(function(b){b.addEventListener('click',function(){
 
 /* ---------- Langue ---------- */
 function setLang(l,save){
-  lang=l; H.lang=l; H.classList.remove('l-fr','l-en'); H.classList.add('l-'+l);
+  lang=l; H.lang=l; H.dir=l==='ar'?'rtl':'ltr'; LANGS.forEach(function(x){H.classList.remove('l-'+x)}); H.classList.add('l-'+l);
   $$('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-set')===l))});
   $$('[data-ph-'+l+']').forEach(function(el){el.placeholder=el.getAttribute('data-ph-'+l)});
   label.textContent=document.body.classList.contains('menu-open')?T[l].close:T[l].menu;
   copyBtns.forEach(function(b){if(!b.classList.contains('ok'))b.textContent=T[l].copy});
   $$('.field.err').forEach(function(f){f.classList.remove('err');var m=$('.msg',f);if(m)m.textContent=''});
   D.forEach(function(d){dom[d.id].setAttribute('aria-label',d[l].lab);d.el.setAttribute('aria-label',d[l].lab)});
-  renderDossier(); if(window.cvSceneRef)cvSceneRef.caption();
+  renderDossier(); if(window.cvSceneRef){cvSceneRef.caption();cvSceneRef.wake()} var lc=document.getElementById('langCurT'); if(lc)lc.textContent=l.toUpperCase();
   if(save){try{localStorage.setItem('mansa-lang',l)}catch(e){}}
 }
-$$('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-set'),true)})});
+var langWrap=$('#langWrap'), langCur=$('#langCur');
+function langMenu(o){langWrap.classList.toggle('open',o);langCur.setAttribute('aria-expanded',String(o))}
+langCur.addEventListener('click',function(e){e.stopPropagation();langMenu(!langWrap.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!e.target.closest('#langWrap'))langMenu(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')langMenu(false)});
+$$('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-set'),true);langMenu(false)})});
 setLang(lang,false);
 
 /* ---------- Chargement ---------- */
