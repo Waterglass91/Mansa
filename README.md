@@ -4,7 +4,7 @@ Site vitrine de Mansa Security, protection rapprochée et sécurité privée à 
 
 Lien direct vers une langue : `#fr`, `#en`, `#es`, `#ar` (le choix du visiteur est ensuite mémorisé).
 
-Page unique autonome : `index.html` (photos intégrées). Publié avec GitHub Pages.
+Pages : `index.html` (site, photos intégrées) et `legal.html` (conditions d'utilisation, confidentialité et cookies, en quatre langues ; la version anglaise prévaut). Publié avec GitHub Pages.
 
 Photos libres de droits (Unsplash, Pexels) à remplacer par les visuels de la marque.
 
