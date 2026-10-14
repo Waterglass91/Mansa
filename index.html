@@ -311,6 +311,66 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 @keyframes roll{to{transform:translateX(-50%)}}
 .no-anim .marquee-track{animation:none;flex-wrap:wrap;width:auto}
 
+/* ===== Conseil & évaluation ===== */
+.cv-facts{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);margin-top:clamp(34px,5vh,56px)}
+.cv-facts li{padding:18px 20px;display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:clamp(20px,1.7vw,26px);line-height:1.2;min-width:0}
+.cv-facts li+li{border-left:1px solid var(--ligne-n)}
+.cv-facts li::before{content:"";flex:0 0 auto;width:7px;height:7px;transform:rotate(45deg);background:var(--or)}
+.cv-scene{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,90px);margin-top:clamp(40px,7vh,80px)}
+.cv-stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);align-self:start;height:min(72vh,640px);border:1px solid var(--ligne);background:radial-gradient(ellipse at 50% 42%,#18150f 0%,var(--noir-2) 72%);overflow:hidden;min-width:0}
+.cv-stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.cv-dots{position:absolute;top:16px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;z-index:2}
+.cv-dots button{position:relative;min-height:36px;padding-top:12px;text-align:left;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris-2);font-variant-numeric:tabular-nums;transition:color .4s;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cv-dots button::before,.cv-dots button::after{content:"";position:absolute;left:0;top:0;height:2px}
+.cv-dots button::before{right:0;background:var(--ligne-n)}
+.cv-dots button::after{width:0;background:var(--or-clair);transition:width .9s var(--ease)}
+.cv-dots button.on{color:var(--or-clair)}
+.cv-dots button.on::after,.cv-dots button.past::after{width:100%}
+.cv-dots b{font-weight:500;color:inherit;margin-right:6px}
+.cv-cap{position:absolute;left:20px;right:20px;bottom:16px;z-index:2;display:flex;align-items:baseline;gap:14px;pointer-events:none}
+.cv-cap b{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(34px,3vw,46px);line-height:1;color:var(--or-clair)}
+.cv-cap span{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris)}
+.cv-steps{list-style:none;min-width:0}
+.cv-step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;padding:34px 0;border-top:1px solid var(--ligne-n);opacity:.3;transition:opacity .6s var(--out)}
+.cv-step:last-child{min-height:50vh}
+.cv-step.on{opacity:1}
+.no-anim .cv-step{opacity:1}
+.cv-step .n{display:flex;align-items:center;gap:14px;font-family:var(--display);font-style:italic;font-size:24px;color:var(--or)}
+.cv-badge{font-family:var(--body);font-style:normal;font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;padding:5px 10px;background:var(--or);color:var(--noir)}
+.cv-badge.ghost{background:transparent;color:var(--or-clair);border:1px solid var(--ligne)}
+.cv-step h3{font-family:var(--display);font-weight:300;font-size:clamp(32px,3.2vw,52px);line-height:1.05;margin:14px 0}
+.cv-step p{color:var(--gris);max-width:44ch}
+.cv-svcs{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:clamp(36px,6vh,64px)}
+.cv-card{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;text-align:left;border:1px solid var(--ligne-n);background:var(--noir-3)}
+.cv-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s var(--out),opacity .6s;opacity:.7}
+.cv-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,9,.92),rgba(10,10,9,.1) 60%)}
+.cv-card .t{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;display:flex;flex-direction:column;gap:6px}
+.cv-card strong{font-family:var(--display);font-weight:400;font-size:clamp(22px,1.8vw,28px);line-height:1.15}
+.cv-card small{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--or-clair)}
+@media (hover:hover){.cv-card:hover img{transform:scale(1);opacity:.9}}
+.cv-cta{text-align:center}
+.cv-cta .dm-h2{margin:0 auto;max-width:20ch}
+.cv-cta .lede{margin:22px auto 34px}
+.cv-cta-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.cv-lines{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 40px;margin-top:30px;font-family:var(--display);font-size:clamp(20px,1.8vw,26px)}
+.cv-lines a{border-bottom:1px solid var(--ligne);padding-bottom:2px;transition:color .3s}
+.cv-lines a:hover{color:var(--or-clair)}
+@media (max-width:900px){
+  .cv-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cv-facts li:nth-child(3){border-left:0}
+  .cv-facts li:nth-child(n+3){border-top:1px solid var(--ligne-n)}
+  .cv-facts li{padding:14px 12px;font-size:19px}
+  .cv-scene{grid-template-columns:minmax(0,1fr);gap:0}
+  .cv-stage{top:calc(env(safe-area-inset-top,0px) + 66px);height:min(40svh,330px);z-index:3;box-shadow:0 18px 30px rgba(10,10,9,.9)}
+  .cv-dots button{min-height:28px}.cv-dots button span{display:none}
+  .cv-cap b{font-size:30px}
+  .cv-step{min-height:58vh}
+  .cv-svcs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cv-card{aspect-ratio:4/5}
+  .cv-card .t{left:12px;right:10px;bottom:12px}.cv-card strong{font-size:19px;overflow-wrap:anywhere;hyphens:auto}
+  .cv-step{justify-content:flex-start;padding-top:28px}
+}
+
 /* Contact */
 .contact-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(50px,7vw,130px);align-items:start}
 .form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 28px;min-width:0}
@@ -460,13 +520,13 @@ var touch=false; try{touch=window.matchMedia('(hover: none)').matches}catch(e){}
 var T={
  fr:{menu:'Menu',close:'Fermer',copy:'Copier',copied:'Copié',selected:'Sélectionné',enter:'Entrer',
      hint:'Survolez un service, cliquez pour l’ouvrir',hintTouch:'Touchez un service pour l’ouvrir',
-     idleK:'Nos services',idleT:'Choisissez un service',idleP:'Protection rapprochée, sécurité résidentielle, sécurité événementielle et vidéosurveillance.',idleH:'',
+     idleK:'Nos services',freeK:'Gratuit · sans engagement',idleT:'Choisissez un service',idleP:'Protection rapprochée, sécurité résidentielle, sécurité événementielle et vidéosurveillance.',idleH:'',
      brg:'REL',ring:'CERCLE',rings:['I · PROCHE','II · PRIVÉ','III · TRAJETS','IV · MENACE'],
      eFirst:'Indiquez votre prénom.',eLast:'Indiquez votre nom.',eMsg:'Décrivez brièvement votre besoin.',eMail:'Indiquez votre adresse email.',eMailBad:'Cette adresse email semble incomplète.',eTerms:'Acceptez les conditions d’utilisation pour continuer.',
      doneK:'Demande prête',doneH:function(n){return 'Merci, '+n+'.'},doneP:function(s){return (s?'Votre demande de '+s.toLowerCase()+' est prête. ':'Votre demande est prête. ')+'Ceci est un aperçu du nouveau site : une fois en ligne, votre message arrivera directement à l’équipe Mansa, qui vous contactera pour organiser une consultation confidentielle.'}},
  en:{menu:'Menu',close:'Close',copy:'Copy',copied:'Copied',selected:'Selected',enter:'Enter',
      hint:'Hover a service, click to open it',hintTouch:'Tap a service to open it',
-     idleK:'Our services',idleT:'Choose a service',idleP:'Close protection, residential security, event security and CCTV.',idleH:'',
+     idleK:'Our services',freeK:'Free · no obligation',idleT:'Choose a service',idleP:'Close protection, residential security, event security and CCTV.',idleH:'',
      brg:'BRG',ring:'RING',rings:['I · CLOSE','II · PRIVACY','III · TRAVEL','IV · THREAT'],
      eFirst:'Please enter your first name.',eLast:'Please enter your last name.',eMsg:'Tell us briefly what you need.',eMail:'Please enter your email address.',eMailBad:'This email address looks incomplete.',eTerms:'Please accept the terms of service to continue.',
      doneK:'Request ready',doneH:function(n){return 'Thank you, '+n+'.'},doneP:function(s){return (s?'Your request for '+s.toLowerCase()+' is ready. ':'Your request is ready. ')+'This is a preview of the new site: once it is live, your message goes straight to the Mansa team, who will contact you to arrange a confidential consultation.'}}
@@ -523,12 +583,12 @@ var D=[
       why:'A clear picture at the right moment changes everything: it deters, it alerts and it provides evidence.',
       l:[['Custom system design','A system designed with you, for the layout and risks of your property.'],['High-quality cameras','Clear, reliable footage, day and night.'],['Advanced analytics','Real-time detection of potential threats.'],['24/7 monitoring','A dedicated team watching around the clock and responding to suspicious activity.'],['Discreet or visible','Covert surveillance of sensitive areas, or a visible deterrent presence.'],['Prompt detection and response','Any unusual activity is spotted and handled straight away.']]}},
  {id:'approach',type:'house',n:'◇',img:'approach',b:15,r:.62,
-  fr:{lab:'Notre approche',short:'Approche',t1:'Notre',t2:'approche',
-      p:'Nos valeurs, notre méthode et les risques que nous couvrons.',
-      i:'Forts de nombreuses années passées à protéger athlètes, musiciens et VIP de tous horizons, nous créons les conditions pour vivre et travailler sous le regard du public, en toute sérénité.'},
-  en:{lab:'Our approach',short:'Approach',t1:'Our',t2:'approach',
-      p:'Our values, our method and the risks we cover.',
-      i:'With years spent protecting athletes, musicians and VIPs from all walks of life, we create the conditions to live and work in the public eye, without worry.'}},
+  fr:{lab:'Conseil & évaluation',short:'Conseil',t1:'Avant toute mission,',t2:'un premier échange.',
+      p:'Conseil et évaluation de sécurité gratuits, sans engagement. Réponse sous 24 h.',
+      i:'Conseil et évaluation de sécurité, gratuits et sans engagement. Exposez-nous votre situation : nous vous disons concrètement ce qu’il faut mettre en place. Réponse sous 24 h.'},
+  en:{lab:'Advice & assessment',short:'Advice',t1:'Before any assignment,',t2:'a first conversation.',
+      p:'Free security advice and assessment, no obligation. Reply within 24 hours.',
+      i:'Security advice and assessment, free and with no obligation. Tell us about your situation and we will tell you, in practical terms, what needs to be in place. Reply within 24 hours.'}},
  {id:'contact',type:'house',n:'✦',img:'contact',b:165,r:.86,
   fr:{lab:'Contact',short:'Contact',t1:'Parlons-en,',t2:'en confidence.',
       p:'Une consultation confidentielle et un devis gratuit. Manchester, Royaume-Uni et international.',
@@ -566,23 +626,39 @@ function svcHTML(d){
   '<div class="rv"><span class="kicker">'+L('Le déroulé d’une mission','How an engagement works')+'</span>'+stepsList()+'</div></section>'+
   nextBlock(d)+foot;
 }
-var RISKS={fr:[['Sécurité physique','Les personnalités sont davantage exposées aux agressions, au harcèlement et aux tentatives de vol. Nos agents forment une barrière physique et sont formés à la désescalade.'],['Protection de la vie privée','Contrôle d’accès, vidéosurveillance et sécurité périmétrique tiennent à distance paparazzis et fans intrusifs.'],['Sécurité des déplacements','Itinéraires, lieux et arrivées sont préparés en amont, au Royaume-Uni comme à l’étranger.'],['Évaluation des menaces','Nous étudions votre profil, votre agenda et les lieux que vous fréquentez, puis chaque risque identifié reçoit une mesure adaptée.']],
-           en:[['Physical safety','Public figures face a higher risk of attack, stalking and robbery. Our officers form a physical barrier and are trained in de-escalation.'],['Privacy protection','Access control, surveillance systems and perimeter security keep paparazzi and intrusive fans at a distance.'],['Travel security','Routes, venues and arrivals are planned ahead, in the UK and abroad.'],['Threat assessment','We study your profile, your schedule and the places you go, then match every identified risk with a measure.']]};
+var CV={
+ facts:[['Gratuit','Free'],['Sans engagement','No obligation'],['Réponse sous 24 h','Reply within 24 hours'],['Confidentiel','Confidential']],
+ steps:{fr:[['Premier échange','Par téléphone, par email ou via le formulaire. Vous nous exposez votre situation en toute confidentialité, et nous vous répondons sous 24 h.','Gratuit',0],
+            ['Évaluation de sécurité','Nous analysons votre exposition : domicile, déplacements, agenda et lieux fréquentés. Vous repartez avec nos recommandations, que vous travailliez avec nous ou non.','Gratuit',0],
+            ['Plan sur mesure','Si vous souhaitez aller plus loin, nous vous remettons un plan de protection et un devis détaillé, adaptés à vos besoins.','Devis',1],
+            ['Mise en place','Nos agents interviennent, au quotidien ou pour un événement, à Manchester, dans tout le Royaume-Uni et à l’étranger.','Mission',1]],
+        en:[['First conversation','By phone, by email or through the form. You tell us about your situation in confidence, and we reply within 24 hours.','Free',0],
+            ['Security assessment','We review your exposure: home, travel, schedule and the places you go. You keep our recommendations, whether or not you work with us.','Free',0],
+            ['Tailored plan','If you want to go further, we provide a protection plan and a detailed quote, built around your needs.','Quote',1],
+            ['Deployment','Our officers step in, day to day or for a single event, in Manchester, across the UK and abroad.','Assignment',1]]}
+};
 function approachHTML(d){
-  var vals=[['Discrétion','Discretion','Nos agents se fondent dans votre environnement et préservent le rythme de votre quotidien.','Our operatives blend into your environment and leave the rhythm of your daily life undisturbed.'],['Vigilance','Vigilance','Présence, surveillance et intervention jour et nuit, chez vous, sur scène ou en déplacement.','Round-the-clock cover, monitoring and response, at home, on stage or on the move.'],['Précision','Precision','Chaque mission commence par l’évaluation de vos risques et aboutit à un plan pensé pour vous seul.','Every engagement starts with an assessment of your own risks and ends with a plan written for you alone.']];
-  var who=[['Athlètes','Athletes'],['Musiciens','Musicians'],['Personnalités','Public figures'],['Résidences privées','Private residences'],['Événements','Live events'],['Locaux professionnels','Business premises']];
-  var mq=who.map(function(w){return '<span>'+L(w[0],w[1])+'</span>'}).join('');
-  return heroBlock(d,'<button class="btn btn-or" type="button" data-go="contact">'+L('Demander une consultation','Request a consultation')+'</button>'+backBtn())+
-  '<section class="dm-sec"><span class="kicker rv">'+L('Nos valeurs','Our values')+'</span><p class="manifesto rv">'+L('Nous créons les conditions pour vivre et travailler sous le regard du public, <em>en toute sérénité.</em>','We create the conditions to live and work in the public eye, <em>without worry.</em>')+'</p>'+
-  '<ul class="values">'+vals.map(function(v){return '<li class="rv"><h3>'+L(v[0],v[1])+'</h3><p>'+L(v[2],v[3])+'</p></li>'}).join('')+'</ul></section>'+
-  '<section class="dm-sec"><span class="kicker rv">'+L('Pourquoi la sécurité est essentielle','Why security is essential')+'</span><h2 class="dm-h2 rv">'+L('Quatre risques, <em>une réponse pour chacun.</em>','Four risks, <em>one answer for each.</em>')+'</h2>'+
-  '<ul class="incl">'+RISKS.fr.map(function(x,i){var e=RISKS.en[i];return '<li class="rv"><strong>'+L(esc(x[0]),esc(e[0]))+'</strong><span>'+L(esc(x[1]),esc(e[1]))+'</span></li>'}).join('')+'</ul></section>'+
-  '<section class="dm-sec dm-split"><div class="rv"><span class="kicker">'+L('Méthode','Method')+'</span><h2 class="dm-h2">'+L('Trois étapes, <em>un seul plan.</em>','Three steps, <em>one plan.</em>')+'</h2></div><div class="rv">'+stepsList()+'</div></section>'+
-  '<div class="marquee" aria-hidden="true"><div class="marquee-track">'+mq+mq+'</div></div>'+
+  var ST=CV.steps;
+  var facts=CV.facts.map(function(f){return '<li>'+L(f[0],f[1])+'</li>'}).join('');
+  var SH=[['Échange','Conversation'],['Évaluation','Assessment'],['Plan','Plan'],['Mission','Assignment']];
+  var dots=ST.fr.map(function(x,i){return '<button type="button" data-cv="'+i+'" aria-label="'+esc(x[0])+'"><b>0'+(i+1)+'</b><span>'+L(SH[i][0],SH[i][1])+'</span></button>'}).join('');
+  var steps=ST.fr.map(function(x,i){var e=ST.en[i];return '<li class="cv-step" data-cvs="'+i+'"><span class="n">0'+(i+1)+' <span class="cv-badge'+(x[3]?' ghost':'')+'">'+L(x[2],e[2])+'</span></span><h3>'+L(x[0],e[0])+'</h3><p>'+L(esc(x[1]),esc(e[1]))+'</p></li>'}).join('');
+  var cards=D.filter(function(x){return x.type==='svc'}).map(function(x){return '<li class="rv"><button class="cv-card" type="button" data-go="'+x.id+'"><img class="ph" src="'+IMG[x.img]+'" alt=""><span class="t"><strong>'+L(x.fr.lab,x.en.lab)+'</strong><small>'+L('Découvrir','Discover')+' →</small></span></button></li>'}).join('');
+  var ask='<button class="btn btn-or" type="button" data-go="contact" data-svc="'+d.k+'">'+L('Demander une évaluation','Request an assessment')+'</button>';
+  return heroBlock(d,ask+backBtn())+
+  '<section class="dm-sec"><span class="kicker rv">'+L('Comment ça se passe','How it works')+'</span><h2 class="dm-h2 rv">'+L('De la première question <em>à la mission.</em>','From the first question <em>to the assignment.</em>')+'</h2>'+
+  '<ul class="cv-facts rv">'+facts+'</ul>'+
+  '<div class="cv-scene"><div class="cv-stage" id="cvStage" aria-hidden="true"><canvas id="cvCanvas"></canvas><div class="cv-dots">'+dots+'</div><div class="cv-cap"><b id="cvNum">01</b><span id="cvName"></span></div></div>'+
+  '<ol class="cv-steps">'+steps+'</ol></div></section>'+
+  '<section class="dm-sec"><span class="kicker rv">'+L('Nos services','Our services')+'</span><h2 class="dm-h2 rv">'+L('Ce que nous <em>mettons en place.</em>','What we <em>put in place.</em>')+'</h2><ul class="cv-svcs">'+cards+'</ul></section>'+
+  '<section class="dm-sec cv-cta"><span class="kicker rv">'+L('Conseil & évaluation','Advice & assessment')+'</span><h2 class="dm-h2 rv">'+L('Une question de sécurité ? <em>Parlons-en.</em>','A security question? <em>Let’s talk.</em>')+'</h2>'+
+  '<p class="lede rv">'+L('Conseil et évaluation gratuits, sans engagement. Réponse sous 24 h.','Free advice and assessment, no obligation. Reply within 24 hours.')+'</p>'+
+  '<div class="cv-cta-row rv">'+ask+'</div>'+
+  '<div class="cv-lines rv"><a href="tel:+447544548227">+44 (0) 7544 548227</a><a href="mailto:info@mansasecurity.co.uk">info@mansasecurity.co.uk</a></div></section>'+
   nextBlock(d)+foot;
 }
 function contactHTML(d){
-  var chips=D.filter(function(x){return x.type==='svc'}).map(function(x){return '<button type="button" class="chip" aria-pressed="false" data-k="'+x.k+'">'+L(x.fr.lab,x.en.lab)+'</button>'}).join('')+'<button type="button" class="chip" aria-pressed="false" data-k="-1">'+L('Je ne sais pas encore','Not sure yet')+'</button>';
+  var chips=[byId.approach].concat(D.filter(function(x){return x.type==='svc'})).map(function(x){return '<button type="button" class="chip" aria-pressed="false" data-k="'+x.k+'">'+L(x.fr.lab,x.en.lab)+'</button>'}).join('')+'<button type="button" class="chip" aria-pressed="false" data-k="-1">'+L('Je ne sais pas encore','Not sure yet')+'</button>';
   return heroBlock(d,backBtn(),true)+
   '<section class="dm-sec"><div class="contact-grid">'+
   '<form class="form rv" id="form" novalidate>'+
@@ -655,7 +731,7 @@ function renderDossier(){
   }else{
     var d=locked, x=d[lang];
     dossier.classList.add('locked');
-    $('#dosK').textContent=d.type==='svc'?t.idleK:'Mansa Security';
+    $('#dosK').textContent=d.type==='svc'?t.idleK:(d.id==='approach'?t.freeK:'Mansa Security');
     $('#dosT').textContent=x.lab; $('#dosP').textContent=x.p; $('#dosGo').textContent=t.enter+' →';
     if(dosImg.getAttribute('data-k')!==d.img){dosImg.classList.add('swap');setTimeout(function(){dosImg.src=IMG[d.img];dosImg.setAttribute('data-k',d.img);dosImg.classList.remove('swap')},180)}
     dossier.classList.remove('flash'); void dossier.offsetWidth; dossier.classList.add('flash');
@@ -713,6 +789,7 @@ function openDomain(d,p,fromRadar){
   document.body.classList.add('in-domain','locked');
   setTimeout(function(){
     if(prev){dom[prev.id].hidden=true;dom[prev.id].classList.remove('open');dom[prev.id].style.zIndex=''}
+    if(d.id==='approach')cvScene.wake();
     el.style.zIndex=55;
     home.classList.add('off'); running=false; busy=false; observe(el);
     try{history.replaceState(null,'','#'+d.id)}catch(e){}
@@ -766,6 +843,114 @@ function observe(el){
   var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{root:el,rootMargin:'0px 0px -8% 0px'});
   items.forEach(function(r){io.observe(r)}); ios[el.id]=io;
 }
+/* ---------- Scène « Conseil & évaluation » ---------- */
+var cvScene=(function(){
+  var dm=dom.approach, stage=$('#cvStage',dm), cv=$('#cvCanvas',dm), cx=cv.getContext('2d');
+  var steps=$$('.cv-step',dm), dots=$$('.cv-dots button',dm);
+  var W=0,H=0,dpr=1, step=0, prev=0, tSwitch=-10, tStep=0, visible=false, raf=0, t0=performance.now();
+  var GOLD='220,210,182', G2='185,167,124';
+  var PLACES={fr:['Domicile','Stade','Hôtel','Aéroport'],en:['Home','Stadium','Hotel','Airport']};
+  var ROUTE=[[.12,.68],[.30,.68],[.30,.36],[.46,.36],[.46,.20],[.64,.20],[.64,.52],[.80,.52],[.80,.68],[.93,.68],[.93,.36]];
+  var PIDX=[0,4,8,10], OFFICE=[.64,.84];
+  var MARKS={fr:['Accès','Parking','Abords'],en:['Access','Parking','Surroundings']};
+  function size(){dpr=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+  function box(){var mob=W<520;return {x:W*.06,y:H*(mob?.2:.17),w:W*.88,h:H*(mob?.6:.64)}}
+  function P(p){var b=box();return [b.x+p[0]*b.w,b.y+p[1]*b.h]}
+  var segL=[],totL=0;
+  function lens(){segL=[];totL=0;for(var i=1;i<ROUTE.length;i++){var a=P(ROUTE[i-1]),b=P(ROUTE[i]);var l=Math.hypot(b[0]-a[0],b[1]-a[1]);segL.push(l);totL+=l}}
+  function at(u){var d=u*totL;for(var i=0;i<segL.length;i++){if(d<=segL[i]||i===segL.length-1){var a=P(ROUTE[i]),b=P(ROUTE[i+1]),k=segL[i]?Math.min(1,d/segL[i]):0;return {x:a[0]+(b[0]-a[0])*k,y:a[1]+(b[1]-a[1])*k,dx:(b[0]-a[0])/(segL[i]||1),dy:(b[1]-a[1])/(segL[i]||1)}}d-=segL[i]}}
+  function uAt(idx){var d=0;for(var i=0;i<idx;i++)d+=segL[i];return d/totL}
+  function font(px,italic){cx.font=(italic?'italic 400 ':'400 ')+px+'px '+(italic?'"Cormorant Garamond", serif':'Jost, sans-serif')}
+  function label(txt,x,y,a,align,hi){font(Math.max(9.5,Math.min(11.5,W*.017)));cx.textAlign=align||'left';cx.textBaseline='middle';cx.fillStyle='rgba('+(hi?GOLD:'240,233,218')+','+a+')';cx.fillText(txt.toUpperCase().split('').join(String.fromCharCode(8202)),x,y)}
+  function streets(a){
+    var b=box();cx.lineWidth=1;cx.strokeStyle='rgba('+G2+','+(.09*a)+')';cx.beginPath();
+    [.04,.2,.36,.52,.68,.84,.98].forEach(function(y){cx.moveTo(b.x-10,b.y+y*b.h);cx.lineTo(b.x+b.w+10,b.y+y*b.h)});
+    [.03,.12,.3,.46,.64,.8,.93].forEach(function(x){cx.moveTo(b.x+x*b.w,b.y-10);cx.lineTo(b.x+x*b.w,b.y+b.h+10)});
+    cx.stroke();
+    cx.strokeStyle='rgba('+G2+','+(.06*a)+')';cx.beginPath();cx.moveTo(b.x-10,b.y+b.h*.9);cx.bezierCurveTo(b.x+b.w*.3,b.y+b.h*.6,b.x+b.w*.55,b.y+b.h*1.05,b.x+b.w+10,b.y+b.h*.78);cx.lineWidth=7;cx.stroke();cx.lineWidth=1;
+  }
+  function places(a,show){
+    var lang=H_lang();
+    PIDX.forEach(function(ix,k){var p=P(ROUTE[ix]);
+      cx.beginPath();cx.arc(p[0],p[1],4,0,7);cx.fillStyle='rgba('+GOLD+','+(.8*a*show[k])+')';cx.fill();
+      cx.beginPath();cx.arc(p[0],p[1],9,0,7);cx.strokeStyle='rgba('+GOLD+','+(.35*a*show[k])+')';cx.stroke();
+      var right=p[0]<W*.8;label(PLACES[lang][k],p[0]+(right?14:-14),p[1]-14,.85*a*show[k],right?'left':'right',true)});
+  }
+  function routePath(u0,u1){var a=at(u0);cx.beginPath();cx.moveTo(a.x,a.y);var d0=u0*totL,d1=u1*totL,d=0;for(var i=0;i<segL.length;i++){var e=d+segL[i];if(e>d0&&d<d1){var q=P(ROUTE[i+1]);if(e<=d1)cx.lineTo(q[0],q[1]);else{var z=at(u1);cx.lineTo(z.x,z.y)}}d=e}}
+  // 01 premier échange
+  function s0(a,t){
+    streets(.6*a);var you=P(ROUTE[0]),of=P(OFFICE),lang=H_lang();
+    cx.setLineDash([3,6]);cx.lineDashOffset=-t*18;cx.strokeStyle='rgba('+GOLD+','+(.5*a)+')';cx.beginPath();cx.moveTo(you[0],you[1]);cx.quadraticCurveTo((you[0]+of[0])/2,Math.min(you[1],of[1])-H*.18,of[0],of[1]);cx.stroke();cx.setLineDash([]);
+    for(var i=0;i<3;i++){var k=((t*.45+i/3)%1),dir=i%2?1-k:k,mx=(you[0]+of[0])/2,my=Math.min(you[1],of[1])-H*.18;
+      var x=(1-dir)*(1-dir)*you[0]+2*(1-dir)*dir*mx+dir*dir*of[0],y=(1-dir)*(1-dir)*you[1]+2*(1-dir)*dir*my+dir*dir*of[1];
+      cx.beginPath();cx.arc(x,y,2.6,0,7);cx.fillStyle='rgba(236,228,206,'+(a*(1-Math.abs(.5-k)))+')';cx.fill()}
+    for(var r=0;r<3;r++){var q=((t*.6+r/3)%1);cx.beginPath();cx.arc(you[0],you[1],8+q*46,0,7);cx.strokeStyle='rgba('+GOLD+','+(a*.55*(1-q))+')';cx.stroke()}
+    [[you,lang==='fr'?'Vous':'You'],[of,'Mansa · Manchester']].forEach(function(n){cx.beginPath();cx.arc(n[0][0],n[0][1],5,0,7);cx.fillStyle='rgba(236,228,206,'+a+')';cx.fill();var r=n[0][0]>W*.55;label(n[1],n[0][0]+(r?6:14),n[0][1]+18,.9*a,r?'right':'left',true)});
+    var mid=[(you[0]+of[0])/2,Math.min(you[1],of[1])-H*.11];font(Math.max(22,W*.045),true);cx.textAlign='center';cx.fillStyle='rgba('+GOLD+','+(.9*a)+')';cx.fillText('24 h',mid[0],mid[1]);
+  }
+  // 02 évaluation
+  function s1(a,t){
+    streets(a);places(a*.55,[1,0,0,0]);var c=P(ROUTE[0]),R=Math.min(W,H)*.42,ang=(t*1.25)%(Math.PI*2)-Math.PI,lang=H_lang();
+    for(var k=1;k<=3;k++){cx.beginPath();cx.arc(c[0],c[1],R*k/3,0,7);cx.strokeStyle='rgba('+G2+','+(.16*a)+')';cx.stroke()}
+    for(var s=0;s<30;s++){var a1=ang-s*.03,a0=a1-.03;cx.beginPath();cx.moveTo(c[0],c[1]);cx.arc(c[0],c[1],R,a0,a1);cx.closePath();cx.fillStyle='rgba('+GOLD+','+(.16*a*Math.pow(1-s/30,1.7))+')';cx.fill()}
+    cx.beginPath();cx.moveTo(c[0],c[1]);cx.lineTo(c[0]+Math.cos(ang)*R,c[1]+Math.sin(ang)*R);cx.strokeStyle='rgba('+GOLD+','+(.8*a)+')';cx.stroke();
+    [[-1.25,.78],[-.45,.58],[.3,.86]].forEach(function(m,i){
+      var x=c[0]+Math.cos(m[0])*R*m[1],y=c[1]+Math.sin(m[0])*R*m[1];
+      var since=((ang-m[0])%(Math.PI*2)+Math.PI*2)%(Math.PI*2);var hot=Math.max(0,1-since/2.4);
+      var vis=Math.min(1,t/1.2+.0)*(.45+.55*hot);
+      cx.save();cx.translate(x,y);cx.rotate(Math.PI/4);cx.strokeStyle='rgba('+GOLD+','+(a*vis)+')';cx.strokeRect(-5,-5,10,10);if(hot>.05){cx.fillStyle='rgba('+GOLD+','+(a*hot*.8)+')';cx.fillRect(-3,-3,6,6)}cx.restore();
+      label(MARKS[lang][i],x+12,y,a*vis,'left',true)});
+    cx.beginPath();cx.arc(c[0],c[1],5,0,7);cx.fillStyle='rgba(236,228,206,'+a+')';cx.fill();
+  }
+  // 03 plan
+  function s2(a,t){
+    streets(a);var cyc=6.5,k=t%cyc,prog=Math.min(1,k/3.4),fade=k>cyc-.6?(cyc-k)/.6:1;
+    cx.lineWidth=1;cx.strokeStyle='rgba('+G2+','+(.22*a)+')';routePath(0,1);cx.stroke();
+    cx.lineWidth=2.2;cx.strokeStyle='rgba('+GOLD+','+(.95*a*fade)+')';cx.shadowColor='rgba('+GOLD+',.6)';cx.shadowBlur=10;if(prog>0){routePath(0,prog);cx.stroke()}cx.shadowBlur=0;cx.lineWidth=1;
+    ROUTE.forEach(function(p,i){if(PIDX.indexOf(i)>=0)return;var u=uAt(i);if(u<=prog){var q=P(p);cx.beginPath();cx.arc(q[0],q[1],2.4,0,7);cx.fillStyle='rgba('+GOLD+','+(.8*a*fade)+')';cx.fill()}});
+    places(a,PIDX.map(function(ix){return uAt(ix)<=prog+.001?fade:.25}));
+    if(prog<1){var h=at(prog);cx.beginPath();cx.arc(h.x,h.y,4,0,7);cx.fillStyle='rgba(236,228,206,'+a+')';cx.fill()}
+  }
+  // 04 protection
+  function s3(a,t){
+    streets(a);cx.lineWidth=1.4;cx.strokeStyle='rgba('+GOLD+','+(.4*a)+')';routePath(0,1);cx.stroke();cx.lineWidth=1;
+    places(a,[1,1,1,1]);
+    var u=(t*.055)%1,p=at(u),nx=-p.dy,ny=p.dx;
+    cx.lineWidth=3;cx.strokeStyle='rgba('+GOLD+','+(.55*a)+')';routePath(Math.max(0,u-.06),u);cx.stroke();cx.lineWidth=1;
+    cx.save();cx.translate(p.x,p.y);cx.rotate(t*.6);cx.setLineDash([2,5]);cx.beginPath();cx.arc(0,0,30,0,7);cx.strokeStyle='rgba('+GOLD+','+(.55*a)+')';cx.stroke();cx.setLineDash([]);cx.restore();
+    var esc=[[16,0],[-11,13],[-11,-13]];
+    esc.forEach(function(e){var x=p.x+p.dx*e[0]+nx*e[1],y=p.y+p.dy*e[0]+ny*e[1];cx.save();cx.translate(x,y);cx.rotate(Math.PI/4);cx.fillStyle='rgba('+GOLD+','+(.95*a)+')';cx.fillRect(-3.2,-3.2,6.4,6.4);cx.restore()});
+    cx.beginPath();cx.arc(p.x,p.y,5,0,7);cx.fillStyle='rgba(245,238,218,'+a+')';cx.shadowColor='rgba('+GOLD+',.9)';cx.shadowBlur=12;cx.fill();cx.shadowBlur=0;
+  }
+  var SCN=[s0,s1,s2,s3];
+  function H_lang(){return lang}
+  function draw(now){
+    if(cv.clientWidth!==W||cv.clientHeight!==H){size();lens()}
+    if(!W)return;
+    var T=reduce?6:(now-t0)/1000;cx.clearRect(0,0,W,H);
+    var k=reduce?1:Math.min(1,(T-tSwitch)/.6);
+    if(k<1)SCN[prev](1-k,T-tStep+10);
+    SCN[step](k,reduce?6:Math.max(0,T-tSwitch));
+  }
+  function loop(now){raf=0;if(!visible||dm.hidden||document.hidden)return;draw(now);raf=requestAnimationFrame(loop)}
+  function wake(){if(!raf&&visible&&!dm.hidden){if(reduce)draw(performance.now());else raf=requestAnimationFrame(loop)}}
+  function caption(){var x=CV.steps[lang][step];$('#cvNum',dm).textContent='0'+(step+1);$('#cvName',dm).textContent=x[0]}
+  function go(i){if(i===step)return;prev=step;step=i;var T=(performance.now()-t0)/1000;tStep=T;tSwitch=T;
+    steps.forEach(function(s,j){s.classList.toggle('on',j===i)});dots.forEach(function(b,j){b.classList.toggle('on',j===i);b.classList.toggle('past',j<i)});caption();if(reduce)draw(performance.now())}
+  steps[0].classList.add('on');dots[0].classList.add('on');caption();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)go(+en.target.getAttribute('data-cvs'))})},{root:dm,rootMargin:(window.innerWidth<=900?'-62% 0px -32% 0px':'-46% 0px -46% 0px')});
+    steps.forEach(function(s){io.observe(s)});
+    new IntersectionObserver(function(es){visible=es[0].isIntersecting;wake()},{root:dm}).observe(stage);
+  }else{visible=true}
+  dots.forEach(function(b){b.addEventListener('click',function(){var s=steps[+b.getAttribute('data-cv')];s.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})})});
+  document.addEventListener('visibilitychange',wake);
+  window.addEventListener('resize',function(){if(!dm.hidden){size();lens();if(reduce)draw(performance.now())}});
+  return {caption:caption,wake:wake,reset:function(){go(0);steps.forEach(function(s,j){s.classList.toggle('on',j===0)})}};
+})();
+
+window.cvSceneRef=cvScene;
+
 /* ---------- Formulaire ---------- */
 $$('#chips .chip').forEach(function(c){c.addEventListener('click',function(){
   var on=c.getAttribute('aria-pressed')==='true';
@@ -805,7 +990,7 @@ function setLang(l,save){
   copyBtns.forEach(function(b){if(!b.classList.contains('ok'))b.textContent=T[l].copy});
   $$('.field.err').forEach(function(f){f.classList.remove('err');var m=$('.msg',f);if(m)m.textContent=''});
   D.forEach(function(d){dom[d.id].setAttribute('aria-label',d[l].lab);d.el.setAttribute('aria-label',d[l].lab)});
-  renderDossier();
+  renderDossier(); if(window.cvSceneRef)cvSceneRef.caption();
   if(save){try{localStorage.setItem('mansa-lang',l)}catch(e){}}
 }
 $$('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-set'),true)})});
