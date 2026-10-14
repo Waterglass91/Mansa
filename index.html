@@ -263,9 +263,7 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .no-anim .dm-title .line>span,.no-anim .dm-hero .kicker,.no-anim .dm-intro,.no-anim .dm-ctas{transform:none;opacity:1}
 .dm-intro{max-width:52ch;margin-top:24px;font-size:clamp(16px,1.25vw,19px);color:rgba(240,233,218,.86)}
 .dm-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.dm-coord{position:absolute;right:var(--gutter);top:110px;z-index:2;text-align:right;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gris);line-height:1.9;font-variant-numeric:tabular-nums}
-.dm-coord b{display:block;font-family:var(--display);font-style:italic;font-weight:300;font-size:64px;letter-spacing:0;line-height:1;color:var(--or-clair)}
-@media (max-width:640px){.dm-coord{display:none}.dm-ctas .btn{flex:1 1 100%}}
+@media (max-width:640px){.dm-ctas .btn{flex:1 1 100%}}
 .dm-sec{padding:clamp(80px,13vh,150px) var(--gutter);border-top:1px solid var(--ligne)}
 .dm-h2{font-family:var(--display);font-size:clamp(38px,4.6vw,76px);line-height:1.04;max-width:18ch}
 .dm-h2 em{font-style:italic;color:var(--or-clair)}
@@ -306,18 +304,6 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .values h3{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(28px,2.4vw,36px);color:var(--or-clair);margin-bottom:14px;line-height:1.1}
 .values p{color:var(--gris);max-width:34ch}
 @media (max-width:900px){.values{grid-template-columns:minmax(0,1fr);gap:0}.values li{padding:26px 0 32px}}
-.layers{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,110px);align-items:center;margin-top:clamp(50px,8vh,90px)}
-.layers svg{width:min(100%,460px);aspect-ratio:1;justify-self:center}
-.ly-ring{fill:none;stroke:var(--ligne);stroke-width:1;transition:stroke .5s,fill .5s}
-.ly-ring.on{stroke:var(--or-clair);fill:rgba(185,167,124,.06)}
-.ly-r{fill:var(--or);font-family:var(--display);font-style:italic;font-size:16px}
-.ly-list{list-style:none;border-top:1px solid var(--ligne)}
-.ly-list li{padding:22px 0;border-bottom:1px solid var(--ligne-n);cursor:default;transition:opacity .4s}
-@media (hover:hover){.ly-list:hover li{opacity:.45}.ly-list li:hover{opacity:1}}
-.ly-list small{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--or)}
-.ly-list strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(24px,2.1vw,32px);line-height:1.2;margin:4px 0 6px}
-.ly-list li>span{color:var(--gris);font-size:15.5px;display:block;max-width:56ch}
-@media (max-width:900px){.layers{grid-template-columns:minmax(0,1fr)}.layers svg{width:min(70vw,300px)}}
 .marquee{overflow:hidden;border-top:1px solid var(--ligne-n);padding:30px 0}
 .marquee-track{display:flex;width:max-content;animation:roll 46s linear infinite}
 .marquee-track>span{font-family:var(--display);font-weight:300;font-style:italic;font-size:clamp(28px,3.4vw,52px);color:rgba(240,233,218,.8);padding:0 clamp(22px,3vw,40px);white-space:nowrap;display:flex;align-items:center;gap:clamp(22px,3vw,40px)}
@@ -473,14 +459,14 @@ var touch=false; try{touch=window.matchMedia('(hover: none)').matches}catch(e){}
 /* ---------- Textes de l'interface (FR / EN) ---------- */
 var T={
  fr:{menu:'Menu',close:'Fermer',copy:'Copier',copied:'Copié',selected:'Sélectionné',enter:'Entrer',
-     hint:'Survolez une cible, cliquez pour entrer',hintTouch:'Touchez une cible pour ouvrir son dossier',
-     idleK:'Dossier · en attente',idleT:'Sélectionnez une cible',idleP:'Quatre expertises et deux points de contact, répartis sur le radar. Chaque cible ouvre son domaine.',idleH:'◆ Expertise   ○ Maison',
+     hint:'Survolez un service, cliquez pour l’ouvrir',hintTouch:'Touchez un service pour l’ouvrir',
+     idleK:'Nos services',idleT:'Choisissez un service',idleP:'Protection rapprochée, sécurité résidentielle, sécurité événementielle et vidéosurveillance.',idleH:'',
      brg:'REL',ring:'CERCLE',rings:['I · PROCHE','II · PRIVÉ','III · TRAJETS','IV · MENACE'],
      eFirst:'Indiquez votre prénom.',eLast:'Indiquez votre nom.',eMsg:'Décrivez brièvement votre besoin.',eMail:'Indiquez votre adresse email.',eMailBad:'Cette adresse email semble incomplète.',eTerms:'Acceptez les conditions d’utilisation pour continuer.',
      doneK:'Demande prête',doneH:function(n){return 'Merci, '+n+'.'},doneP:function(s){return (s?'Votre demande de '+s.toLowerCase()+' est prête. ':'Votre demande est prête. ')+'Ceci est un aperçu du nouveau site : une fois en ligne, votre message arrivera directement à l’équipe Mansa, qui vous contactera pour organiser une consultation confidentielle.'}},
  en:{menu:'Menu',close:'Close',copy:'Copy',copied:'Copied',selected:'Selected',enter:'Enter',
-     hint:'Hover a target, click to enter',hintTouch:'Tap a target to open its file',
-     idleK:'File · standing by',idleT:'Select a target',idleP:'Four disciplines and two points of contact, spread across the radar. Each target opens its own domain.',idleH:'◆ Discipline   ○ House',
+     hint:'Hover a service, click to open it',hintTouch:'Tap a service to open it',
+     idleK:'Our services',idleT:'Choose a service',idleP:'Close protection, residential security, event security and CCTV.',idleH:'',
      brg:'BRG',ring:'RING',rings:['I · CLOSE','II · PRIVACY','III · TRAVEL','IV · THREAT'],
      eFirst:'Please enter your first name.',eLast:'Please enter your last name.',eMsg:'Tell us briefly what you need.',eMail:'Please enter your email address.',eMailBad:'This email address looks incomplete.',eTerms:'Please accept the terms of service to continue.',
      doneK:'Request ready',doneH:function(n){return 'Thank you, '+n+'.'},doneP:function(s){return (s?'Your request for '+s.toLowerCase()+' is ready. ':'Your request is ready. ')+'This is a preview of the new site: once it is live, your message goes straight to the Mansa team, who will contact you to arrange a confidential consultation.'}}
@@ -538,10 +524,10 @@ var D=[
       l:[['Custom system design','A system designed with you, for the layout and risks of your property.'],['High-quality cameras','Clear, reliable footage, day and night.'],['Advanced analytics','Real-time detection of potential threats.'],['24/7 monitoring','A dedicated team watching around the clock and responding to suspicious activity.'],['Discreet or visible','Covert surveillance of sensitive areas, or a visible deterrent presence.'],['Prompt detection and response','Any unusual activity is spotted and handled straight away.']]}},
  {id:'approach',type:'house',n:'◇',img:'approach',b:15,r:.62,
   fr:{lab:'Notre approche',short:'Approche',t1:'Notre',t2:'approche',
-      p:'Les quatre cercles de protection, nos valeurs et notre méthode en trois étapes.',
+      p:'Nos valeurs, notre méthode et les risques que nous couvrons.',
       i:'Forts de nombreuses années passées à protéger athlètes, musiciens et VIP de tous horizons, nous créons les conditions pour vivre et travailler sous le regard du public, en toute sérénité.'},
   en:{lab:'Our approach',short:'Approach',t1:'Our',t2:'approach',
-      p:'The four rings of protection, our values and our three-step method.',
+      p:'Our values, our method and the risks we cover.',
       i:'With years spent protecting athletes, musicians and VIPs from all walks of life, we create the conditions to live and work in the public eye, without worry.'}},
  {id:'contact',type:'house',n:'✦',img:'contact',b:165,r:.86,
   fr:{lab:'Contact',short:'Contact',t1:'Parlons-en,',t2:'en confidence.',
@@ -565,13 +551,12 @@ function nextOf(d){return D[(d.k+1)%D.length]}
 function heroBlock(d,ctas,short){
   var ring=ringOf(d.r);
   return '<header class="dm-hero'+(short?' dm-hero--short':'')+'"><img class="dm-img ph" src="'+IMG[d.img]+'" alt=""><div class="dm-veil"></div>'+
-   '<div class="dm-coord"><b>'+d.n+'</b>'+L('Relèvement','Bearing')+' '+pad3(d.b)+'°<br>'+L('Cercle','Ring')+' '+ROMAN[ring]+'</div>'+
-   '<div class="dm-hero-in"><span class="kicker">'+(d.type==='svc'?L('Domaine '+d.n,'Domain '+d.n):L('La maison Mansa','The Mansa house'))+' · '+L(d.fr.lab,d.en.lab)+'</span>'+
+   '<div class="dm-hero-in"><span class="kicker">'+(d.type==='svc'?L('Nos services','Our services'):'Mansa Enterprise')+'</span>'+
    '<h1 class="dm-title"><span class="line"><span>'+L(d.fr.t1,d.en.t1)+'</span></span><span class="line"><span>'+L(d.fr.t2,d.en.t2)+'</span></span></h1>'+
    '<p class="dm-intro">'+L(d.fr.i,d.en.i)+'</p><div class="dm-ctas">'+ctas+'</div></div></header>';
 }
 function backBtn(){return '<button class="btn btn-ligne" type="button" data-home>'+L('Retour au radar','Back to radar')+'</button>'}
-function nextBlock(d){var n=nextOf(d);return '<button class="dm-next" type="button" data-go="'+n.id+'"><img class="ph" src="'+IMG[n.img]+'" alt=""><span class="dm-next-in"><span class="dm-next-k">'+L('Domaine suivant','Next domain')+'</span><span class="dm-next-t">'+L(n.fr.lab,n.en.lab)+' <i>→</i></span></span></button>'}
+function nextBlock(d){var n=nextOf(d);return '<button class="dm-next" type="button" data-go="'+n.id+'"><img class="ph" src="'+IMG[n.img]+'" alt=""><span class="dm-next-in"><span class="dm-next-k">'+L('Suivant','Next')+'</span><span class="dm-next-t">'+L(n.fr.lab,n.en.lab)+' <i>→</i></span></span></button>'}
 function stepsList(){return '<ol class="msteps">'+STEPS.fr.map(function(s,i){var e=STEPS.en[i];return '<li><span class="n">0'+(i+1)+'</span><strong>'+L(s[0],e[0])+'</strong><span>'+L(s[1],e[1])+'</span></li>'}).join('')+'</ol>'}
 function svcHTML(d){
   return heroBlock(d,'<button class="btn btn-or" type="button" data-go="contact" data-svc="'+d.k+'">'+L('Demander ce service','Request this service')+'</button>'+backBtn())+
@@ -581,8 +566,8 @@ function svcHTML(d){
   '<div class="rv"><span class="kicker">'+L('Le déroulé d’une mission','How an engagement works')+'</span>'+stepsList()+'</div></section>'+
   nextBlock(d)+foot;
 }
-var LAYERS={fr:[['IV · Cercle extérieur','Évaluation et réduction des menaces','Avant tout, nous étudions les risques : votre profil, votre agenda, les lieux que vous fréquentez. Chaque menace identifiée reçoit une mesure qui la réduit.'],['III · Déplacements','Sécurité des déplacements','Itinéraires, lieux et arrivées sont préparés en amont, au Royaume-Uni comme à l’étranger, pour que chaque trajet reste fluide et protégé de porte à porte.'],['II · Vie privée','Protection de la vie privée','Contrôle d’accès, vidéosurveillance et sécurité périmétrique tiennent à distance paparazzis et fans intrusifs.'],['I · Cercle rapproché','Sécurité physique','Nos agents forment une barrière physique et sont formés à la désescalade pour stopper les incidents avant qu’ils ne surviennent.']],
-            en:[['IV · Outer ring','Threat assessment & mitigation','Before anything else, we study the risks: your profile, your schedule, the places you go. Every threat we identify is matched with a measure that reduces it.'],['III · Movement','Travel security','Routes, venues and arrivals are planned ahead, in the UK and abroad, so every journey stays smooth and protected from door to door.'],['II · Private life','Privacy protection','Access control, surveillance systems and perimeter security keep paparazzi and intrusive fans at a distance.'],['I · Close ring','Physical safety','Our officers form a physical barrier and are trained in de-escalation to stop incidents before they start.']]};
+var RISKS={fr:[['Sécurité physique','Les personnalités sont davantage exposées aux agressions, au harcèlement et aux tentatives de vol. Nos agents forment une barrière physique et sont formés à la désescalade.'],['Protection de la vie privée','Contrôle d’accès, vidéosurveillance et sécurité périmétrique tiennent à distance paparazzis et fans intrusifs.'],['Sécurité des déplacements','Itinéraires, lieux et arrivées sont préparés en amont, au Royaume-Uni comme à l’étranger.'],['Évaluation des menaces','Nous étudions votre profil, votre agenda et les lieux que vous fréquentez, puis chaque risque identifié reçoit une mesure adaptée.']],
+           en:[['Physical safety','Public figures face a higher risk of attack, stalking and robbery. Our officers form a physical barrier and are trained in de-escalation.'],['Privacy protection','Access control, surveillance systems and perimeter security keep paparazzi and intrusive fans at a distance.'],['Travel security','Routes, venues and arrivals are planned ahead, in the UK and abroad.'],['Threat assessment','We study your profile, your schedule and the places you go, then match every identified risk with a measure.']]};
 function approachHTML(d){
   var vals=[['Discrétion','Discretion','Nos agents se fondent dans votre environnement et préservent le rythme de votre quotidien.','Our operatives blend into your environment and leave the rhythm of your daily life undisturbed.'],['Vigilance','Vigilance','Présence, surveillance et intervention jour et nuit, chez vous, sur scène ou en déplacement.','Round-the-clock cover, monitoring and response, at home, on stage or on the move.'],['Précision','Precision','Chaque mission commence par l’évaluation de vos risques et aboutit à un plan pensé pour vous seul.','Every engagement starts with an assessment of your own risks and ends with a plan written for you alone.']];
   var who=[['Athlètes','Athletes'],['Musiciens','Musicians'],['Personnalités','Public figures'],['Résidences privées','Private residences'],['Événements','Live events'],['Locaux professionnels','Business premises']];
@@ -590,9 +575,8 @@ function approachHTML(d){
   return heroBlock(d,'<button class="btn btn-or" type="button" data-go="contact">'+L('Demander une consultation','Request a consultation')+'</button>'+backBtn())+
   '<section class="dm-sec"><span class="kicker rv">'+L('Nos valeurs','Our values')+'</span><p class="manifesto rv">'+L('Nous créons les conditions pour vivre et travailler sous le regard du public, <em>en toute sérénité.</em>','We create the conditions to live and work in the public eye, <em>without worry.</em>')+'</p>'+
   '<ul class="values">'+vals.map(function(v){return '<li class="rv"><h3>'+L(v[0],v[1])+'</h3><p>'+L(v[2],v[3])+'</p></li>'}).join('')+'</ul></section>'+
-  '<section class="dm-sec"><span class="kicker rv">'+L('Pourquoi la sécurité est essentielle','Why security is essential')+'</span><h2 class="dm-h2 rv">'+L('Quatre cercles autour <em>de l’essentiel.</em>','Four rings around <em>what matters.</em>')+'</h2>'+
-  '<div class="layers"><svg viewBox="0 0 400 400" aria-hidden="true" class="rv"><circle class="ly-ring" data-ly="0" cx="200" cy="200" r="190"/><circle class="ly-ring" data-ly="1" cx="200" cy="200" r="142"/><circle class="ly-ring" data-ly="2" cx="200" cy="200" r="94"/><circle class="ly-ring" data-ly="3" cx="200" cy="200" r="46"/><text class="ly-r" x="208" y="32">IV</text><text class="ly-r" x="208" y="80">III</text><text class="ly-r" x="208" y="128">II</text><text class="ly-r" x="208" y="176">I</text><circle cx="200" cy="200" r="4" fill="#e3cf9f"/></svg>'+
-  '<ul class="ly-list">'+LAYERS.fr.map(function(x,i){var e=LAYERS.en[i];return '<li class="rv" data-ly="'+i+'"><small>'+L(x[0],e[0])+'</small><strong>'+L(esc(x[1]),esc(e[1]))+'</strong><span>'+L(esc(x[2]),esc(e[2]))+'</span></li>'}).join('')+'</ul></div></section>'+
+  '<section class="dm-sec"><span class="kicker rv">'+L('Pourquoi la sécurité est essentielle','Why security is essential')+'</span><h2 class="dm-h2 rv">'+L('Quatre risques, <em>une réponse pour chacun.</em>','Four risks, <em>one answer for each.</em>')+'</h2>'+
+  '<ul class="incl">'+RISKS.fr.map(function(x,i){var e=RISKS.en[i];return '<li class="rv"><strong>'+L(esc(x[0]),esc(e[0]))+'</strong><span>'+L(esc(x[1]),esc(e[1]))+'</span></li>'}).join('')+'</ul></section>'+
   '<section class="dm-sec dm-split"><div class="rv"><span class="kicker">'+L('Méthode','Method')+'</span><h2 class="dm-h2">'+L('Trois étapes, <em>un seul plan.</em>','Three steps, <em>one plan.</em>')+'</h2></div><div class="rv">'+stepsList()+'</div></section>'+
   '<div class="marquee" aria-hidden="true"><div class="marquee-track">'+mq+mq+'</div></div>'+
   nextBlock(d)+foot;
@@ -632,8 +616,8 @@ window.addEventListener('scroll',function(){if(!current)header.classList.toggle(
 
 /* ---------- Menu ---------- */
 var menuNav=$('#menuNav'), menuSide=$('#menuSide');
-menuNav.innerHTML='<button type="button" data-home style="--i:0"><small>◎</small><span class="t">'+L('Le radar','The radar')+'</span></button>'+
-  D.map(function(d,i){return '<button type="button" data-go="'+d.id+'" data-pv="'+d.img+'" style="--i:'+(i+1)+'"><small>'+d.n+'</small><span class="t">'+L(d.fr.lab,d.en.lab)+'</span></button>'}).join('');
+menuNav.innerHTML='<button type="button" data-home style="--i:0"><span class="t">'+L('Le radar','The radar')+'</span></button>'+
+  D.map(function(d,i){return '<button type="button" data-go="'+d.id+'" data-pv="'+d.img+'" style="--i:'+(i+1)+'"><span class="t">'+L(d.fr.lab,d.en.lab)+'</span></button>'}).join('');
 menuSide.innerHTML=['home'].concat(D.map(function(d){return d.img})).map(function(k){return '<img class="ph'+(k==='home'?' on':'')+'" data-pk="'+k+'" src="'+IMG[k]+'" alt="">'}).join('');
 $$('button',menuNav).forEach(function(b){b.addEventListener('mouseenter',function(){var k=b.getAttribute('data-pv')||'home';$$('img',menuSide).forEach(function(im){im.classList.toggle('on',im.getAttribute('data-pk')===k)})})});
 var menu=$('#menu'), toggle=$('#menuToggle'), label=$('#menuLabel');
@@ -651,7 +635,7 @@ D.forEach(function(d){
   var side=d.side?(d.side==='l'?'side-l':''):(Math.sin(rad)<-.05?'side-l':'');
   var bt=document.createElement('button'); bt.type='button'; bt.className='tgt tgt--'+d.type+' '+side; bt.setAttribute('data-t',d.id);
   bt.style.setProperty('--x',x+'%'); bt.style.setProperty('--y',y+'%');
-  bt.innerHTML='<span class="tgt-brk"></span><span class="tgt-mark"></span><span class="tgt-lab">'+(d.type==='svc'?'<b>'+d.n+'</b>':'')+'<span>'+L('<span class="long">'+d.fr.lab+'</span>','<span class="long">'+d.en.lab+'</span>')+'</span></span>';
+  bt.innerHTML='<span class="tgt-brk"></span><span class="tgt-mark"></span><span class="tgt-lab"><span>'+L('<span class="long">'+d.fr.lab+'</span>','<span class="long">'+d.en.lab+'</span>')+'</span></span>';
   // libellé court sur mobile
   var lab=bt.querySelector('.tgt-lab>span:last-child'); lab.insertAdjacentHTML('beforeend','<span class="short-l">'+L(d.fr.short,d.en.short)+'</span>');
   d.el=bt; tWrap.appendChild(bt);
@@ -671,7 +655,7 @@ function renderDossier(){
   }else{
     var d=locked, x=d[lang];
     dossier.classList.add('locked');
-    $('#dosK').textContent=(d.type==='svc'?(lang==='fr'?'Domaine ':'Domain ')+d.n+' · ':'')+t.brg+' '+pad3(d.b)+'° · '+t.ring+' '+ROMAN[ringOf(d.r)];
+    $('#dosK').textContent=d.type==='svc'?t.idleK:'Mansa Enterprise';
     $('#dosT').textContent=x.lab; $('#dosP').textContent=x.p; $('#dosGo').textContent=t.enter+' →';
     if(dosImg.getAttribute('data-k')!==d.img){dosImg.classList.add('swap');setTimeout(function(){dosImg.src=IMG[d.img];dosImg.setAttribute('data-k',d.img);dosImg.classList.remove('swap')},180)}
     dossier.classList.remove('flash'); void dossier.offsetWidth; dossier.classList.add('flash');
@@ -782,12 +766,6 @@ function observe(el){
   var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{root:el,rootMargin:'0px 0px -8% 0px'});
   items.forEach(function(r){io.observe(r)}); ios[el.id]=io;
 }
-/* Cercles de l'approche */
-$$('.ly-list li').forEach(function(li){
-  li.addEventListener('mouseenter',function(){var k=li.getAttribute('data-ly');$$('.ly-ring').forEach(function(c){c.classList.toggle('on',c.getAttribute('data-ly')===k)})});
-  li.addEventListener('mouseleave',function(){$$('.ly-ring').forEach(function(c){c.classList.remove('on')})});
-});
-
 /* ---------- Formulaire ---------- */
 $$('#chips .chip').forEach(function(c){c.addEventListener('click',function(){
   var on=c.getAttribute('aria-pressed')==='true';
