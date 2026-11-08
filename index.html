@@ -410,6 +410,9 @@ body.menu-open .menu-foot{opacity:1;transition-delay:.8s}
 .check a{color:var(--or-clair);border-bottom:1px solid var(--ligne)}
 .form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:20px 30px;align-items:center;justify-content:space-between}
 .form-foot small{font-size:13px;color:var(--gris);max-width:38ch}
+.send-err{flex-basis:100%;font-size:14px;color:var(--erreur)}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.btn[disabled]{opacity:.6;cursor:wait}
 .done{grid-column:1/-1;border:1px solid var(--ligne);padding:clamp(28px,4vw,48px);background:var(--noir-2)}
 .done h3{font-family:var(--display);font-weight:300;font-size:clamp(34px,3vw,48px);line-height:1.1;margin:10px 0 14px}
 .done p{color:var(--gris);max-width:50ch}
@@ -591,23 +594,31 @@ var T={
      idleK:'Nos services',freeK:'Gratuit · sans engagement',idleT:'Choisissez un service',idleP:'Protection rapprochée, sécurité résidentielle, sécurité événementielle et vidéosurveillance.',idleH:'',
      brg:'REL',ring:'CERCLE',rings:['I · PROCHE','II · PRIVÉ','III · TRAJETS','IV · MENACE'],
      eFirst:'Indiquez votre prénom.',eLast:'Indiquez votre nom.',eMsg:'Décrivez brièvement votre besoin.',eMail:'Indiquez votre adresse email.',eMailBad:'Cette adresse email semble incomplète.',eTerms:'Acceptez les conditions d’utilisation pour continuer.',
-     doneK:'Demande prête',doneH:function(n){return 'Merci, '+n+'.'},doneP:function(s){return (s?'Votre demande de '+s.toLowerCase()+' est prête. ':'Votre demande est prête. ')+'Ceci est un aperçu du nouveau site : une fois en ligne, votre message arrivera directement à l’équipe Mansa, qui vous contactera pour organiser une consultation confidentielle.'}},
+     doneK:'Demande prête',doneH:function(n){return 'Merci, '+n+'.'},doneP:function(s){return (s?'Votre demande de '+s.toLowerCase()+' est prête. ':'Votre demande est prête. ')+'Ceci est un aperçu du nouveau site : une fois en ligne, votre message arrivera directement à l’équipe Mansa, qui vous contactera pour organiser une consultation confidentielle.'},
+     sentK:'Demande envoyée',sentP:function(s){return (s?'Votre demande de '+s.toLowerCase()+' a bien été envoyée. ':'Votre demande a bien été envoyée. ')+'L’équipe Mansa vous répond sous 24 h, en toute confidentialité.'},
+     sending:'Envoi en cours…',eSend:'L’envoi n’a pas abouti. Réessayez dans un instant, ou écrivez-nous à info@mansasecurity.co.uk.'},
  en:{menu:'Menu',close:'Close',copy:'Copy',copied:'Copied',selected:'Selected',enter:'Enter',
      hint:'Hover a service, click to open it',hintTouch:'Tap a service to open it',
      idleK:'Our services',freeK:'Free · no obligation',idleT:'Choose a service',idleP:'Close protection, residential security, event security and CCTV.',idleH:'',
      brg:'BRG',ring:'RING',rings:['I · CLOSE','II · PRIVACY','III · TRAVEL','IV · THREAT'],
      eFirst:'Please enter your first name.',eLast:'Please enter your last name.',eMsg:'Tell us briefly what you need.',eMail:'Please enter your email address.',eMailBad:'This email address looks incomplete.',eTerms:'Please accept the terms of use to continue.',
-     doneK:'Request ready',doneH:function(n){return 'Thank you, '+n+'.'},doneP:function(s){return (s?'Your request for '+s.toLowerCase()+' is ready. ':'Your request is ready. ')+'This is a preview of the new site: once it is live, your message goes straight to the Mansa team, who will contact you to arrange a confidential consultation.'}},
+     doneK:'Request ready',doneH:function(n){return 'Thank you, '+n+'.'},doneP:function(s){return (s?'Your request for '+s.toLowerCase()+' is ready. ':'Your request is ready. ')+'This is a preview of the new site: once it is live, your message goes straight to the Mansa team, who will contact you to arrange a confidential consultation.'},
+     sentK:'Request sent',sentP:function(s){return (s?'Your request for '+s.toLowerCase()+' has been sent. ':'Your request has been sent. ')+'The Mansa team will reply within 24 hours, in strict confidence.'},
+     sending:'Sending…',eSend:'Your request could not be sent. Please try again in a moment, or email us at info@mansasecurity.co.uk.'},
  es:{menu:'Menú',close:'Cerrar',copy:'Copiar',copied:'Copiado',selected:'Seleccionado',enter:'Entrar',
      hint:'Pase el cursor sobre un servicio y haga clic para abrirlo',hintTouch:'Toque un servicio para abrirlo',
      idleK:'Nuestros servicios',freeK:'Gratis · sin compromiso',idleT:'Elija un servicio',idleP:'Protección personal, seguridad residencial, seguridad para eventos y videovigilancia.',idleH:'',
      eFirst:'Indique su nombre.',eLast:'Indique sus apellidos.',eMsg:'Describa brevemente lo que necesita.',eMail:'Indique su correo electrónico.',eMailBad:'Esta dirección de correo parece incompleta.',eTerms:'Acepte las condiciones de uso para continuar.',
-     doneK:'Solicitud lista',doneH:function(n){return 'Gracias, '+n+'.'},doneP:function(s){return (s?'Su solicitud de '+s.toLowerCase()+' está lista. ':'Su solicitud está lista. ')+'Esta es una vista previa del nuevo sitio: una vez publicado, su mensaje llegará directamente al equipo de Mansa, que se pondrá en contacto con usted para organizar una consulta confidencial.'}},
+     doneK:'Solicitud lista',doneH:function(n){return 'Gracias, '+n+'.'},doneP:function(s){return (s?'Su solicitud de '+s.toLowerCase()+' está lista. ':'Su solicitud está lista. ')+'Esta es una vista previa del nuevo sitio: una vez publicado, su mensaje llegará directamente al equipo de Mansa, que se pondrá en contacto con usted para organizar una consulta confidencial.'},
+     sentK:'Solicitud enviada',sentP:function(s){return (s?'Su solicitud de '+s.toLowerCase()+' se ha enviado correctamente. ':'Su solicitud se ha enviado correctamente. ')+'El equipo de Mansa le responderá en 24 h, con total confidencialidad.'},
+     sending:'Enviando…',eSend:'No se ha podido enviar su solicitud. Inténtelo de nuevo en unos instantes o escríbanos a info@mansasecurity.co.uk.'},
  ar:{menu:'القائمة',close:'إغلاق',copy:'نسخ',copied:'تم النسخ',selected:'تم التحديد',enter:'دخول',
      hint:'مرر المؤشر على خدمة وانقر لفتحها',hintTouch:'المس خدمة لفتحها',
      idleK:'خدماتنا',freeK:'مجاني · دون التزام',idleT:'اختر خدمة',idleP:'الحماية الشخصية، والأمن السكني، وأمن الفعاليات، والمراقبة بالفيديو.',idleH:'',
      eFirst:'يرجى إدخال الاسم الأول.',eLast:'يرجى إدخال اسم العائلة.',eMsg:'يرجى وصف طلبكم باختصار.',eMail:'يرجى إدخال البريد الإلكتروني.',eMailBad:'يبدو أن عنوان البريد الإلكتروني غير مكتمل.',eTerms:'يرجى الموافقة على شروط الاستخدام للمتابعة.',
-     doneK:'الطلب جاهز',doneH:function(n){return 'شكرًا، '+n+'.'},doneP:function(s){return (s?'طلبكم بخصوص «'+s+'» جاهز. ':'طلبكم جاهز. ')+'هذه نسخة تجريبية من الموقع الجديد: بعد إطلاقه، ستصل رسالتكم مباشرة إلى فريق Mansa الذي سيتواصل معكم لترتيب استشارة سرية.'}}
+     doneK:'الطلب جاهز',doneH:function(n){return 'شكرًا، '+n+'.'},doneP:function(s){return (s?'طلبكم بخصوص «'+s+'» جاهز. ':'طلبكم جاهز. ')+'هذه نسخة تجريبية من الموقع الجديد: بعد إطلاقه، ستصل رسالتكم مباشرة إلى فريق Mansa الذي سيتواصل معكم لترتيب استشارة سرية.'},
+     sentK:'تم إرسال الطلب',sentP:function(s){return (s?'تم إرسال طلبكم بخصوص «'+s+'» بنجاح. ':'تم إرسال طلبكم بنجاح. ')+'سيرد عليكم فريق Mansa خلال 24 ساعة، بسرية تامة.'},
+     sending:'جارٍ الإرسال…',eSend:'تعذر إرسال طلبكم. يرجى المحاولة مجددًا بعد قليل، أو مراسلتنا على info@mansasecurity.co.uk.'}
 };
 
 /* ---------- Méthode commune ---------- */
@@ -748,7 +759,8 @@ function contactHTML(d){
    '<div class="field full"><span class="lbl" id="l-service">'+L('Service','Service')+'</span><div class="chips" role="group" aria-labelledby="l-service" id="chips">'+chips+'</div></div>'+
    '<div class="field full"><label for="f-msg">'+L('Votre message','Your message')+' <b>*</b></label><textarea id="f-msg" name="message"'+ph('Dates, lieux, nombre de personnes, tout ce que nous devons savoir.','Dates, locations, number of people, anything we should know.')+' required></textarea><span class="msg" aria-live="polite"></span></div>'+
    '<div class="field full"><label class="check" for="f-terms"><input id="f-terms" type="checkbox" required><span>'+L('J’ai lu et j’accepte les <a href="legal.html#terms" target="_blank" rel="noopener">conditions d’utilisation</a> et la <a href="legal.html#privacy" target="_blank" rel="noopener">politique de confidentialité</a>.','I have read and accept the <a href="legal.html#terms" target="_blank" rel="noopener">terms of use</a> and the <a href="legal.html#privacy" target="_blank" rel="noopener">privacy notice</a>.')+'</span></label><span class="msg" aria-live="polite"></span></div>'+
-   '<div class="form-foot"><small>'+L('Vos informations restent strictement confidentielles et servent uniquement à répondre à votre demande.','Your details are treated in strict confidence and used only to answer your request.')+'</small><button class="btn btn-or" type="submit">'+L('Envoyer ma demande','Send my request')+'</button></div>'+
+   '<div class="form-foot"><small>'+L('Vos informations restent strictement confidentielles et servent uniquement à répondre à votre demande.','Your details are treated in strict confidence and used only to answer your request.')+'</small><button class="btn btn-or" type="submit" id="f-send">'+L('Envoyer ma demande','Send my request')+'</button><p class="send-err" id="f-err" role="alert" hidden></p></div>'+
+   '<input type="checkbox" name="botcheck" id="f-bot" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">'+
   '</form>'+
   '<aside class="coords rv">'+
    '<div class="coord"><small>'+L('Téléphone','Telephone')+'</small><div class="coord-row"><span class="coord-v" id="c-tel">+44 (0) 7513 351989</span><button class="copy" type="button" data-copy="c-tel"></button></div></div>'+
@@ -1030,7 +1042,10 @@ var cvScene=(function(){
 
 window.cvSceneRef=cvScene;
 
-/* ---------- Formulaire ---------- */
+/* ---------- Formulaire ----------
+   Envoi par Web3Forms (https://web3forms.com). La clé d'accès est publique par conception ;
+   les messages arrivent sur l'adresse email utilisée pour créer la clé. Vide = mode aperçu. */
+var FORM_URL='https://api.web3forms.com/submit', FORM_KEY='';
 $$('#chips .chip').forEach(function(c){c.addEventListener('click',function(){
   var on=c.getAttribute('aria-pressed')==='true';
   $$('#chips .chip').forEach(function(x){x.setAttribute('aria-pressed','false')});
@@ -1048,7 +1063,24 @@ form.addEventListener('submit',function(e){
   if(!ok){var first=$('.field.err input,.field.err textarea',form);if(first)first.focus();return}
   var sel=$('#chips .chip[aria-pressed="true"]'), k=sel?+sel.getAttribute('data-k'):-1;
   var name=esc(v('f-first'));
-  form.innerHTML='<div class="done" role="status">'+LANGS.map(function(l){var s=k>=0?D[k][l].lab:'';return '<div data-l="'+l+'"><span class="kicker" style="margin-bottom:0">'+T[l].doneK+'</span><h3>'+T[l].doneH(name)+'</h3><p>'+esc(T[l].doneP(s))+'</p></div>'}).join('')+'</div>';
+  function finish(sent){
+    form.innerHTML='<div class="done" role="status">'+LANGS.map(function(l){var s=k>=0?D[k][l].lab:'';return '<div data-l="'+l+'"><span class="kicker" style="margin-bottom:0">'+(sent?T[l].sentK:T[l].doneK)+'</span><h3>'+T[l].doneH(name)+'</h3><p>'+esc(sent?T[l].sentP(s):T[l].doneP(s))+'</p></div>'}).join('')+'</div>';
+  }
+  if(!FORM_KEY){finish(false);return}          // aperçu : rien n'est envoyé tant que la clé n'est pas renseignée
+  if($('#f-bot').checked){finish(true);return}  // robot : on fait semblant
+  var btn=$('#f-send'), errEl=$('#f-err'), label=btn.innerHTML;
+  btn.disabled=true; btn.textContent=t.sending; errEl.hidden=true;
+  var svc=k>=0?D[k].en.lab:'Not specified', full=v('f-first')+' '+v('f-last');
+  var payload={access_key:FORM_KEY,
+    subject:'New website enquiry · '+svc+' · '+full,
+    from_name:'Mansa Security website', replyto:v('f-email'),
+    Name:full, Email:v('f-email'), Phone:v('f-phone')||'Not given', Service:svc,
+    Message:v('f-msg'), Language:{fr:'French',en:'English',es:'Spanish',ar:'Arabic'}[lang]||lang,
+    Consent:'Terms of use and privacy notice accepted', botcheck:''};
+  fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success===false)throw new Error(j.message||r.status)})})
+    .then(function(){finish(true)})
+    .catch(function(){btn.disabled=false;btn.innerHTML=label;errEl.textContent=T[lang].eSend;errEl.hidden=false});
 });
 
 /* ---------- Copier ---------- */
