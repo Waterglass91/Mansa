@@ -10,3 +10,5 @@ Photos libres de droits (Unsplash, Pexels) à remplacer par les visuels de la ma
 
 Logo officiel : `assets/mansa-emblem.png` (emblème détouré, fond transparent).
 Logos Mansa Security / Executive Protection : `assets/logo/` (fond clair, fond sombre, transparents).
+
+Domaine : https://www.mansasecurity.co.uk (fichier `CNAME`). DNS chez Squarespace : 4 enregistrements A vers GitHub Pages et un CNAME `www` vers waterglass91.github.io.
